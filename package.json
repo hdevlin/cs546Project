@@ -1,0 +1,24 @@
+{
+  "name": "cs546project",
+  "version": "1.0.0",
+  "description": "CS-546-A Group 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdevlin/cs546Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hdevlin/cs546Project/issues"
+  },
+  "homepage": "https://github.com/hdevlin/cs546Project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5"
+  }
+}
