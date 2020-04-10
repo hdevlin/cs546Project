@@ -1,0 +1,24 @@
+body {
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+}
+
+.navbar {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-flex;
+}
+
+.navbar a {
+    padding: 8px;
+    background-color: #dddddd;
+    text-decoration: none;
+    display: block;
+}
