@@ -12,11 +12,11 @@ function checkTitle(title) {
     if (!title) throw "You must provide an title";
 }
 
-function checkEmail(email) {
+function checkSubject(email) {
     if (!email) throw "You must provide an email";
 }
 
-function checkPassword(password) {
+function checkDifficulty(password) {
     if (!password) throw "You must input a password";
     // TODO: Check based on password criteria (min 5 chars, etc.)
 }
@@ -40,20 +40,22 @@ module.exports = {
      */
     async addLesson(title, subject, difficulty, questions, badges) {
         checkTitle(title);
-        checkEmail(subject);
-        checkPassword(difficulty);
+        checkSubject(subject);
+        checkDifficulty(difficulty);
         // TODO
         // checkQuestions(questions)
         // checkBadges(badges)
         const lessonCollection = await lessons();
 
-        const newUser = {
-            name: title,
-            email: subject,
-            password: difficulty, // TODO: hash and salt the password
+        const newLesson = {
+            title: title,
+            subject: subject,
+            difficulty: difficulty, // TODO: hash and salt the password
+            questions: questions,
+            badges: badges,
         };
 
-        const insertInfo = await lessonCollection.insertOne(newUser);
+        const insertInfo = await lessonCollection.insertOne(newLesson);
         if (insertInfo.insertedCount === 0) throw ERRORS.NOMODIFY;
 
         return insertInfo.insertedId;
@@ -62,23 +64,25 @@ module.exports = {
     /**
      *
      */
-    async getAllUsers() {
-        const userCollection = await lessons();
-        const userList = await userCollection.find({}).toArray();
-        return userList;
+    async getAllLessons() {
+        const lessonCollection = await lessons();
+        const lessonList = await lessonCollection.find({}).toArray();
+        return lessonList;
     },
 
     /**
      *
      * @param {string} id
      */
-    async getUser(id) {
+    async getLesson(id) {
         checkId(id);
-        const userCollection = await lessons();
-        const user = await userCollection.findOne({ _id: new ObjectID(id) });
-        if (user === null) throw ERRORS.NOEXIST;
+        const lessonCollection = await lessons();
+        const lesson = await lessonCollection.findOne({
+            _id: new ObjectID(id),
+        });
+        if (lesson === null) throw ERRORS.NOEXIST;
 
-        return user;
+        return lesson;
     },
 
     /**
@@ -86,22 +90,22 @@ module.exports = {
      * @param {string} id
      * @param {{}} options
      */
-    async updateUser(id, options = {}) {
+    async updateLesson(id, options = {}) {
         checkId(id);
         // TODO: check the options object
 
-        const userCollection = await lessons();
-        let originalUser = await this.getUser(id);
+        const lessonCollection = await lessons();
+        let originalLesson = await this.getLesson(id);
 
         const updateAlbum = {};
 
         if (options.name) {
             updateAlbum.name = options.name;
         } else {
-            updateAlbum.name = originalUser.name;
+            updateAlbum.name = originalLesson.name;
         }
 
-        const updatedInfo = await userCollection.updateOne(
+        const updatedInfo = await lessonCollection.updateOne(
             { _id: new ObjectID(id) },
             {
                 $set: { name: updateAlbum.name },
@@ -112,23 +116,23 @@ module.exports = {
             throw ERRORS.NOMODIFY;
         }
 
-        return await this.getUser(id);
+        return await this.getLesson(id);
     },
 
-    async removeUser(id) {
+    async removeLesson(id) {
         checkId(id);
 
-        const user = await this.getUser(id);
+        const lesson = await this.getLesson(id);
 
-        const userCollection = await lessons();
+        const lessonCollection = await lessons();
 
-        const deletionInfo = await userCollection.deleteOne({
+        const deletionInfo = await lessonCollection.deleteOne({
             _id: new ObjectID(id),
         });
         if (deletionInfo.deletedCount === 0) {
             throw ERRORS.NOMODIFY;
         }
 
-        return user;
+        return lesson;
     },
 };
