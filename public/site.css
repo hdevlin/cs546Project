@@ -22,6 +22,11 @@ body {
     display: block;
 }
 
+.navbar a:hover {
+    background-color: yellow;
+    font-weight: bold;
+}
+
 footer {
     text-align: center;
 }
@@ -50,12 +55,15 @@ footer {
     text-align: center;
 }
 
-/* .row:after {
-    content: "";
-    display: table;
-    clear: both;
-} */
-
 .lesson-go {
     font-size: 200%;
+    border: none;
+    background-color: gray;
+    color: white;
+    padding: 15px 32px;
+}
+
+.lesson-go:hover {
+    background-color: #4caf50;
+    font-weight: bold;
 }
