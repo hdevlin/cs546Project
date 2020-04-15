@@ -42,16 +42,21 @@ footer {
     background-color: #bbb;
 }
 
+.lesson-row-b div {
+    padding: 5px;
+    background-color: #ddd;
+}
+
 .lesson-column-1 {
     min-width: 50%;
 }
 
 .lesson-column-2 {
-    min-width: 30%;
+    min-width: 35%;
 }
 
 .lesson-column-3 {
-    min-width: 20%;
+    min-width: 15%;
     text-align: center;
 }
 
