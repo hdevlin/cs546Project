@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>All Lessons - Untitled Learning Platform</title>
+    <link rel="stylesheet" href="/public/site.css">
+</head>
+<body>
+    <ul class="navbar">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/">Browse Lessons</a></li>
+        <li><a href="/">My Profile</a></li>
+    </ul>
+    <h1>All Lessons</h1>
+    <main>
+        <div class="lesson-row-header">
+            <div class="lesson-column-1">
+                <h2>Lesson</h2>
+            </div>
+            <div class="lesson-column-2">
+                <h2>Potential Badges</h2>
+            </div>
+            <div class="lesson-column-3">
+                <h2>Try It</h2>
+            </div>
+        </div>
+        <div class="lesson-row-a">
+            <div class="lesson-column-1">
+                <h3>Lesson Name</h3>
+                <ul>
+                    <li><p>Time: </p></li>
+                    <li><p>Questions: </p></li>
+                </ul>
+            </div>
+            <div class="lesson-column-2">
+                <p>(Badge icons)</p>
+            </div>
+            <div class="lesson-column-3">
+                <button class="lesson-go">Go</button>
+            </div>
+        </div>
+
+        <!--
+            Format:
+            (eventually, the above will be commented & handlebars will populate the page)
+        -->
+        {{!-- {{#each lessons._id}}
+            <p></p>
+        {{/each}} --}}
+    </main>
+    <br>
+    <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
+</body>
+</html>

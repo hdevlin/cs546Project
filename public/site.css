@@ -1,8 +1,7 @@
 body {
-    margin-top: 5%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-bottom: 5%;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .navbar {
@@ -21,4 +20,42 @@ body {
     background-color: #dddddd;
     text-decoration: none;
     display: block;
+}
+
+footer {
+    text-align: center;
+}
+
+.lesson-row-header, .lesson-row-a, .lesson-row-b {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.lesson-row-a div {
+    padding: 5px;
+    background-color: #bbb;
+}
+
+.lesson-column-1 {
+    min-width: 50%;
+}
+
+.lesson-column-2 {
+    min-width: 30%;
+}
+
+.lesson-column-3 {
+    min-width: 20%;
+    text-align: center;
+}
+
+/* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+} */
+
+.lesson-go {
+    font-size: 200%;
 }
