@@ -1,14 +1,9 @@
-body {
-    margin-left: 20%;
-    margin-right: 20%;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
 .navbar {
     text-align: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .navbar li {
@@ -31,44 +26,40 @@ footer {
     text-align: center;
 }
 
-.lesson-row-header, .lesson-row-a, .lesson-row-b {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+.container {
+    border-bottom: 2px solid black;
 }
 
-.lesson-row-a div {
-    padding: 5px;
-    background-color: #bbb;
+.container-header {
+    text-align: center;
+    border-bottom: 2px solid black;
 }
 
-.lesson-row-b div {
-    padding: 5px;
-    background-color: #ddd;
-}
+/* Lessons page, might be separated later */
 
-.lesson-column-1 {
-    min-width: 50%;
+.lesson-column {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .lesson-column-2 {
-    min-width: 35%;
+    text-align: center;
+    margin: auto;
 }
 
 .lesson-column-3 {
-    min-width: 15%;
     text-align: center;
+    margin: auto;
 }
 
 .lesson-go {
-    font-size: 200%;
+    font-size: 150%;
     border: none;
-    background-color: gray;
+    background-color: #4caf50;
     color: white;
     padding: 15px 32px;
 }
 
 .lesson-go:hover {
-    background-color: #4caf50;
     font-weight: bold;
 }
