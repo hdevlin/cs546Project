@@ -1,10 +1,12 @@
+const reqbody1 = require('../data/sampleReqBody')
+
 const constructorMethod = app => {
     app.get('/', (_, res) => {
       res.render('layouts/main')
     })
 
     app.get('/lessons', (_, res) => {
-      res.render('layouts/lessons', { layout: false })
+      res.render('layouts/lessons', { layout: false, reqbody: reqbody1 })
     })
     
     app.use('*', (_, res) => {

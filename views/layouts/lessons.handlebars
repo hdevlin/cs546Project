@@ -13,70 +13,26 @@
     </ul>
     <h1>All Lessons</h1>
     <main>
-        <div class="lesson-row-header">
-            <div class="lesson-column-1">
-                <h2>Lesson</h2>
-            </div>
-            <div class="lesson-column-2">
-                <h2>Potential Badges</h2>
-            </div>
-            <div class="lesson-column-3">
-                <h2>Try It</h2>
-            </div>
-        </div>
-        <div class="lesson-row-a">
-            <div class="lesson-column-1">
-                <h3>Lesson Name</h3>
-                <ul>
-                    <li><p>Time: </p></li>
-                    <li><p>Questions: </p></li>
-                </ul>
-            </div>
-            <div class="lesson-column-2">
-                <p>(Badge icons)</p>
-            </div>
-            <div class="lesson-column-3">
-                <button class="lesson-go">Go</button>
-            </div>
-        </div>
-        <div class="lesson-row-b">
-            <div class="lesson-column-1">
-                <h3>Lesson Name</h3>
-                <ul>
-                    <li><p>Time: </p></li>
-                    <li><p>Questions: </p></li>
-                </ul>
-            </div>
-            <div class="lesson-column-2">
-                <p>(Badge icons)</p>
-            </div>
-            <div class="lesson-column-3">
-                <button class="lesson-go">Go</button>
-            </div>
-        </div>
-        <div class="lesson-row-a">
-            <div class="lesson-column-1">
-                <h3>Lesson Name</h3>
-                <ul>
-                    <li><p>Time: </p></li>
-                    <li><p>Questions: </p></li>
-                </ul>
-            </div>
-            <div class="lesson-column-2">
-                <p>(Badge icons)</p>
-            </div>
-            <div class="lesson-column-3">
-                <button class="lesson-go">Go</button>
-            </div>
-        </div>
-
         <!--
-            Format:
-            (eventually, the above will be commented & handlebars will populate the page)
+            Populate with lessons from request body, then run client script to alternate colors [might need simplification]
         -->
-        {{!-- {{#each lessons._id}}
-            <p></p>
-        {{/each}} --}}
+        {{#each reqbody.lessons}}
+        <div class="lesson-row-a">
+            <div class="lesson-column-1">
+                <h3>{{title}}</h3>
+                <ul>
+                    <li><p>Topic: {{subject}}</p></li>
+                    <li><p>Questions: {{questions.length}}</p></li>
+                </ul>
+            </div>
+            <div class="lesson-column-2">
+                <p>(Badge icons)</p>
+            </div>
+            <div class="lesson-column-3">
+                <button class="lesson-go">Go</button>
+            </div>
+        </div>
+        {{/each}}
     </main>
     <br>
     <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
