@@ -1,28 +1,26 @@
-{
-    "lessons": [
-        {
-            "_id": "id0",
-            "title": "Basic Algebra",
-            "subject": "Math",
-            "difficulty": 1,
-            "questions": ["id0", "id1"],
-            "badges": ["id0", "id1"]
-        },
-        {
-            "_id": "id1",
-            "title": "Recursion I",
-            "subject": "Computer Science",
-            "difficulty": 1,
-            "questions": ["id0", "id1"],
-            "badges": ["id0", "id1"]
-        },
-        {
-            "_id": "id2",
-            "title": "Linked Lists",
-            "subject": "Computer Science",
-            "difficulty": 2,
-            "questions": ["id0", "id1"],
-            "badges": ["id0", "id1"]
-        }
-    ]
-}
+[
+    {
+        "_id": "id0",
+        "title": "Basic Algebra",
+        "subject": "Math",
+        "difficulty": 1,
+        "questions": ["id0", "id1"],
+        "badges": ["id0", "id1"]
+    },
+    {
+        "_id": "id1",
+        "title": "Recursion I",
+        "subject": "Computer Science",
+        "difficulty": 1,
+        "questions": ["id0", "id1"],
+        "badges": ["id0", "id1"]
+    },
+    {
+        "_id": "id2",
+        "title": "Linked Lists",
+        "subject": "Computer Science",
+        "difficulty": 2,
+        "questions": ["id0", "id1"],
+        "badges": ["id0", "id1"]
+    }
+]
