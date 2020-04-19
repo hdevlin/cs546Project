@@ -1,0 +1,29 @@
+{
+    "_id": "",
+    "name": "John Doe",
+    "email": "john555@gmail.com",
+    "hashedPassword": "",
+    "lessons": [
+        {
+            "_id": "id0",
+            "title": "Callback Functions in JS",
+            "subject": "Computer Science",
+            "difficulty": 1,
+            "questions": [],
+            "badges": []
+        },
+        {
+            "_id": "id1",
+            "title": "Python Classes",
+            "subject": "Computer Science",
+            "difficulty": 2,
+            "questions": [],
+            "badges": []
+        }
+    ],
+    "questions": {
+        "id0": ["id0", "id1"],
+        "id1": ["id0"]
+    },
+    "badges": []
+}

@@ -40,10 +40,12 @@ footer {
 .dashboard-column {
     padding-top: 10px;
     padding-bottom: 10px;
+    text-align: center;
 }
 
 .card {
     display: inline-block;
+    margin-top: 5px;
 }
 
 /* Lessons page, might be separated later */
