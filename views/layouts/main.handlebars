@@ -3,20 +3,62 @@
 <head>
     <meta charset="utf-8">
     <title>Dashboard - Untitled Learning Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/site.css">
 </head>
 <body>
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
-        <li><a href="/">Browse Lessons</a></li>
-        <li><a href="/">My Profile</a></li>
+        <li><a href="/lessons">Browse Lessons</a></li>
+        <li><a href="/profile">My Profile</a></li>
     </ul>
-    <h1>Dashboard</h1>
+
+    <div class="jumbotron text-center">
+        <h1>Dashboard</h1>
+    </div>
+
     <main>
-        <h2 id="ip">Lessons In Progress</h2>
-        <p>(Display lesson previews with % complete for each)</p>
-        <h2 id="browse">More Lessons</h2>
-        <p>(Display some lessons that are not in progress)</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="ip">Lessons In Progress</h2>
+
+                <!--
+                    Populate with lessons from request body
+                -->
+                {{#each reqbody.lessons}}
+                <div class="card" style="width: 18rem;">
+                    {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Difficulty: {{difficulty}}</li>
+                            <li class="list-group-item">0% complete</li>
+                        </ul>
+                        <br>
+                        <a href="#" class="btn btn-primary">Continue</a>
+                        <a href="#" class="btn btn-danger">Drop</a>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="browse">More Lessons</h2>
+                <p>[Display some recommended lessons]</p>
+            </div>
+        </div>
+    </div>
     </main>
+
+    <br>
+    <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
 </body>
 </html>

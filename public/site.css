@@ -1,15 +1,9 @@
-body {
-    margin-top: 5%;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 5%;
-}
-
 .navbar {
     text-align: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .navbar li {
@@ -21,4 +15,64 @@ body {
     background-color: #dddddd;
     text-decoration: none;
     display: block;
+}
+
+.navbar a:hover {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+}
+
+.container {
+    border-bottom: 2px solid black;
+}
+
+.container-header {
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+/* Dashboard page */
+
+.dashboard-column {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.card {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Lessons page, might be separated later */
+
+.lesson-column {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.lesson-column-2 {
+    text-align: center;
+    margin: auto;
+}
+
+.lesson-column-3 {
+    text-align: center;
+    margin: auto;
+}
+
+.lesson-go {
+    font-size: 150%;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 32px;
+}
+
+.lesson-go:hover {
+    font-weight: bold;
 }
