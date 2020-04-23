@@ -35,6 +35,11 @@ footer {
     border-bottom: 2px solid black;
 }
 
+.badge-icon {
+    height: 50px;
+    width: 50px;
+}
+
 /* Dashboard page */
 
 .dashboard-column {

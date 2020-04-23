@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My Profile - Untitled Learning Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/site.css">
+</head>
+<body>
+    <ul class="navbar">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/lessons">Browse Lessons</a></li>
+        <li><a href="/profile">My Profile</a></li>
+    </ul>
+
+    <div class="jumbotron text-center">
+        <h1>My Profile</h1>
+    </div>
+
+    <main>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="username">[username]</h2>
+                <h4 id="email">[email]</h4>
+                <br>
+                <p>Completed Lessons: 0</p>
+                <p>Badges Earned: 0</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="ip">Lessons In Progress</h2>
+
+                <!--
+                    Populate with lessons from request body
+                -->
+                <div class="card" style="width: 18rem;">
+                    {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
+                    <div class="card-body">
+                        <h4 class="card-title">[title]</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">[difficulty]</li>
+                            <li class="list-group-item">0% complete</li>
+                        </ul>
+                        <br>
+                        <a href="#" class="btn btn-primary">Continue</a>
+                        <a href="#" class="btn btn-danger">Drop</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 dashboard-column">
+                <h2 id="ip">Completed Lessons</h2>
+
+                <!--
+                    Populate with lessons from request body
+                -->
+                <div class="card" style="width: 18rem;">
+                    {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
+                    <div class="card-body">
+                        <h4 class="card-title">[title]</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">[difficulty]</li>
+                            <li class="list-group-item">0% accuracy</li>
+                        </ul>
+                        <br>
+                        <a href="#" class="btn btn-primary">Open</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2 dashboard-column">
+                <h2 id="badges">Badges Earned</h2>
+
+                <!--
+                    Populate using request body
+                -->
+                <img src="https://www.iconpacks.net/icons/1/free-badge-icon-1355-thumb.png" class="badge-icon rounded-circle">
+                <img src="https://www.iconpacks.net/icons/1/free-badge-icon-1355-thumb.png" class="badge-icon rounded-circle">
+
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <br>
+    <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
+</body>
+</html>
