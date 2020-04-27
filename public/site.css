@@ -81,3 +81,10 @@ footer {
 .lesson-go:hover {
     font-weight: bold;
 }
+
+/* Profile page */
+
+#profile_photo {
+    width: 25%;
+    height: 60%;
+}
