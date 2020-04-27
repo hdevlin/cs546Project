@@ -16,6 +16,10 @@ const constructorMethod = app => {
     app.get('/profile', (_, res) => {
       res.render('layouts/profile', { layout: false, reqbody: reqProfile })
     })
+
+    app.get('/login', (_, res) => {
+      res.render('login', { layout: false })
+    })
     
     app.use('*', (_, res) => {
       res.status(404).json({ error: "Not found" })

@@ -88,3 +88,17 @@ footer {
     width: 25%;
     height: 60%;
 }
+
+/* Login page */
+
+.tab-pane {
+    text-align: center;
+}
+
+.tab-pane input {
+    width: 30%;
+}
+
+.form-control {
+    margin: 0 auto;
+}
