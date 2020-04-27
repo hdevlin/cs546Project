@@ -1,19 +1,20 @@
-const reqbody1 = require('../data/samples/reqbody_main')
-const reqbody2 = require('../data/samples/reqbody_lessons')
+const reqMain = require('../data/samples/reqbody_main')
+const reqLessons = require('../data/samples/reqbody_lessons')
+const reqProfile = require('../data/samples/reqbody_profile')
 
 const constructorMethod = app => {
     // TODO pass correctly formatted request body jsons
     app.get('/', (_, res) => {
       // TODO turn lesson ids into full objects before passing to layout 
-      res.render('layouts/main', { layout: false, reqbody: reqbody1 })
+      res.render('layouts/main', { layout: false, reqbody: reqMain })
     })
 
     app.get('/lessons', (_, res) => {
-      res.render('layouts/lessons', { layout: false, reqbody: reqbody2 })
+      res.render('layouts/lessons', { layout: false, reqbody: reqLessons })
     })
 
     app.get('/profile', (_, res) => {
-      res.render('layouts/profile', { layout: false })
+      res.render('layouts/profile', { layout: false, reqbody: reqProfile })
     })
     
     app.use('*', (_, res) => {
