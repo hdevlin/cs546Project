@@ -4,23 +4,23 @@
         "title": "Basic Algebra",
         "subject": "Math",
         "difficulty": 1,
-        "questions": ["id0", "id1"],
-        "badges": ["id0", "id1"]
+        "questions": ["q0", "q1"],
+        "badges": ["b0", "b1"]
     },
     {
         "_id": "id1",
-        "title": "Recursion I",
+        "title": "Callback Functions in JS",
         "subject": "Computer Science",
         "difficulty": 1,
-        "questions": ["id0", "id1"],
-        "badges": ["id0", "id1"]
+        "questions": ["q0", "q1"],
+        "badges": ["b2"]
     },
     {
         "_id": "id2",
-        "title": "Linked Lists",
+        "title": "Python Classes",
         "subject": "Computer Science",
         "difficulty": 2,
-        "questions": ["id0", "id1"],
-        "badges": ["id0", "id1"]
+        "questions": ["q0", "q1"],
+        "badges": ["b2"]
     }
 ]
