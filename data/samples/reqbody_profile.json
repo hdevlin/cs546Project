@@ -1,6 +1,5 @@
 {
     "_id": "id0",
-    "username": "john555",
     "name": "John Doe",
     "email": "john555@gmail.com",
     "hashedPassword": "",
