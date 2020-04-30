@@ -4,7 +4,7 @@ function changeDifficultyText() {
     for (let i = 0; i < elems.length; ++i) {
         switch (elems[i].innerHTML) {
             case "1":
-                elems[i].innerHTML = "Beginner"
+                elems[i].innerHTML = "Easy"
                 break
             case "2":
                 elems[i].innerHTML = "Intermediate"

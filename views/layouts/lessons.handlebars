@@ -9,8 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/site.css">
+    <script src="/public/script.js"></script>
 </head>
-<body>
+<body onload="changeDifficultyText()">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -23,38 +24,38 @@
 
     <main>
     <div class="container">
-        <div class="row container-header">
-            <div class="col-md-6">
-                <h2>Lesson</h2>
-            </div>
-            <div class="col-md-3">
-                <h2>Potential Badges</h2>
-            </div>
-            <div class="col-md-3">
-                <h2>Try It</h2>
-            </div>
-        </div>
 
-        <!--
-            Populate using request body
-        -->
-        {{#each reqbody}}
-        <div class="row">
-            <div class="col-md-6 lesson-column lesson-column-1">
-                <h3>{{title}}</h3>
-                <ul>
-                    <li>Topic: {{subject}}</li>
-                    <li>Questions: {{questions.length}}</li>
-                </ul>
-            </div>
-            <div class="col-md-3 lesson-column lesson-column-2">
-                <p>[Badge icons]</p>
-            </div>
-            <div class="col-md-3 lesson-column lesson-column-3">
-                <button class="lesson-go">Start</button>
-            </div>
-        </div>
-        {{/each}}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"><h3>Topic</h3></th>
+                    <th scope="col"><h3>Lesson</h3></th>
+                    <th scope="col"><h3>Potential Badges</h3></th>
+                    <th scope="col"><h3>Try It</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <!--
+                Populate using request body
+            -->
+            {{#each reqbody}}
+            <tr>
+                <td>{{subject}}</td>
+                <td>{{title}}
+                    <ul>
+                        <li class="diff">{{difficulty}}</li>
+                        <li>{{questions.length}} questions</li>
+                    </ul>
+                </td>
+                <td>[Badge icons]</td>
+                <td><a href="#" class="btn btn-success">Start</a></td>
+            </tr>
+            {{/each}}
+
+            </tbody>
+        </table>
+
     </div>
     </main>
 
