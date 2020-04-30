@@ -1,0 +1,52 @@
+[
+    {
+        "_id": "id0",
+        "name": "John Doe",
+        "email": "john555@gmail.com",
+        "hashedPassword": "",
+        "lessons": [
+            "id1"
+        ],
+        "completedLessons": [
+            "id0"
+        ],
+        "completedQuestions": {
+            "id0": ["q0", "q1"],
+            "id1": ["q0"]
+        },
+        "badges": ["b2", "b4"]
+    },
+    {
+        "_id": "id1",
+        "name": "Jenny Wendy",
+        "email": "jw400@gmail.com",
+        "hashedPassword": "",
+        "lessons": [
+            "id2"
+        ],
+        "completedLessons": [
+            "id0", "id1"
+        ],
+        "completedQuestions": {
+            "id0": ["q0", "q1"],
+            "id1": ["q0", "q1"],
+            "id2": []
+        },
+        "badges": ["b1", "b2"]
+    },
+    {
+        "_id": "id2",
+        "name": "Max Martin",
+        "email": "mxm201@gmail.com",
+        "hashedPassword": "",
+        "lessons": [
+            "id1", "id2"
+        ],
+        "completedLessons": [],
+        "completedQuestions": {
+            "id1": ["q0"],
+            "id2": ["q0"]
+        },
+        "badges": ["b1"]
+    }
+]

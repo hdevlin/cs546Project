@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Dashboard - Untitled Learning Platform</title>
+    <title>My Profile - Untitled Learning Platform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -19,18 +19,26 @@
     </ul>
 
     <div class="jumbotron text-center">
-        <h1>Dashboard</h1>
+        <h1>My Profile</h1>
     </div>
 
     <main>
     <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <img id="profile_photo" src="/public/profile.png">
+                <h2 id="name">{{reqbody.name}}</h2>
+                <h4 id="username_email">{{reqbody.username}} [{{reqbody.email}}]</h4>
+                <br>
+                <p>Completed Lessons: {{reqbody.completedLessons.length}}</p>
+                <p>Badges Earned: {{reqbody.badges.length}}</p>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12 dashboard-column">
                 <h2 id="ip">Lessons In Progress</h2>
-                {{#if reqbody.auth}}
-                {{else}}
-                    <p><a href="/login">Login</a> to track your progress!</p>
-                {{/if}}
 
                 <!--
                     Populate using request body
@@ -55,9 +63,37 @@
         </div>
         
         <div class="row">
-            <div class="col-md-12 dashboard-column">
-                <h2 id="browse">More Lessons</h2>
-                <p>[Display some recommended lessons]</p>
+            <div class="col-md-8 dashboard-column">
+                <h2 id="ip">Completed Lessons</h2>
+
+                <!--
+                    Populate using request body
+                -->
+                {{#each reqbody.completedLessons}}
+                <div class="card" style="width: 18rem;">
+                    {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item diff">{{difficulty}}</li>
+                            <li class="list-group-item">0% accuracy</li>
+                        </ul>
+                        <br>
+                        <a href="#" class="btn btn-primary">Open</a>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+            <div class="col-md-2 dashboard-column">
+                <h2 id="badges">Badges Earned</h2>
+
+                <!--
+                    Populate using request body
+                -->
+                <img src="/public/badge-0.png" class="badge-icon rounded-circle">
+                <img src="/public/badge-0.png" class="badge-icon rounded-circle">
+
             </div>
         </div>
     </div>
