@@ -20,6 +20,11 @@ const constructorMethod = app => {
     app.get('/login', (_, res) => {
       res.render('login', { layout: false })
     })
+
+    // temporary for debugging
+    app.get('/question', (_, res) => {
+      res.render('layouts/question', { layout: false })
+    })
     
     app.use('*', (_, res) => {
       res.status(404).json({ error: "Not found" })
