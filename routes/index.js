@@ -1,6 +1,7 @@
 const reqMain = require('../data/samples/reqbody_main')
 const reqLessons = require('../data/samples/reqbody_lessons')
 const reqProfile = require('../data/samples/reqbody_profile')
+const reqQuestion = require('../data/samples/reqbody_question')
 
 const constructorMethod = app => {
     // TODO pass correctly formatted request body jsons
@@ -23,7 +24,7 @@ const constructorMethod = app => {
 
     // temporary for debugging
     app.get('/question', (_, res) => {
-      res.render('layouts/question', { layout: false })
+      res.render('layouts/question', { layout: false, reqbody: JSON.stringify(reqQuestion), helpers: { json: function (context) { return JSON.stringify(context) } }})
     })
     
     app.use('*', (_, res) => {

@@ -9,8 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/site.css">
+    <script src="/public/quizControls.js"></script>
 </head>
-<body>
+<body onload="setup()">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -18,7 +19,7 @@
     </ul>
 
     <div class="jumbotron text-center">
-        <h1>{{lessonName}}</h1>
+        <h1>{{reqbody.lessonTitle}}</h1>
     </div>
 
     <main>
@@ -42,8 +43,8 @@
         </table>
 
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Previous</button>
-            <button type="button" class="btn btn-secondary">Next</button>
+            <button type="button" class="btn btn-secondary" id="prev">Previous</button>
+            <button type="button" class="btn btn-secondary" id="next">Next</button>
         </div>
 
     </div>

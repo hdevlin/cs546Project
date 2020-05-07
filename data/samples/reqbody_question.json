@@ -1,0 +1,17 @@
+{
+    "lessonTitle": "Sample Lesson",
+    "questions": [
+        {
+            "question": "What is 2 + 2?",
+            "type": "choice",
+            "choices": ["0", "2", "4", "5"],
+            "answer": "4"
+        },
+        {
+            "question": "What is 4 * 4?",
+            "type": "choice",
+            "choices": ["1", "4", "8", "16"],
+            "answer": "16"
+        }
+    ]
+}
