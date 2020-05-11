@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "l0",
+        "title": "Test Lesson",
+        "subject": "Math",
+        "difficulty": 1,
+        "questions": ["q0", "q1"],
+        "badges": ["b0"]
+    },
+    {
+        "_id": "l1",
+        "title": "Basic Algebra",
+        "subject": "Math",
+        "difficulty": 1,
+        "questions": ["q2", "q3"],
+        "badges": ["b1"]
+    },
+    {
+        "_id": "l2",
+        "title": "Callback Functions in JS",
+        "subject": "Computer Science",
+        "difficulty": 1,
+        "questions": ["q4", "q5"],
+        "badges": ["b2"]
+    },
+    {
+        "_id": "l3",
+        "title": "Python Classes",
+        "subject": "Computer Science",
+        "difficulty": 2,
+        "questions": ["q6", "q7"],
+        "badges": ["b2", "b3"]
+    }
+]
