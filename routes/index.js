@@ -7,9 +7,9 @@ const users = require('../data/samples/users.json')
 
 const constructorMethod = app => {
     // TODO pass correctly formatted request body jsons
-    app.get('/', (_, res) => {
+    app.get('/', (req, res) => {
       // TODO turn lesson ids into full objects before passing to layout 
-      res.render('layouts/main', { layout: false, reqbody: reqMain })
+      res.render('layouts/main', { layout: false, reqbody: reqMain, authinfo: req.session.user })
     })
 
     app.get('/lessons', (_, res) => {
@@ -26,11 +26,11 @@ const constructorMethod = app => {
 
     app.post('/login', async (req, res) => {
       // attempt to login user with provided credentials
-      if (!req.body['username'] || !req.body['password'] || req.body['username'].trim() === '' || req.body['password'].trim() === '') {
-        res.status(401).redirect('/login/?err=ya')
+      if (!req.body['email'] || !req.body['password'] || req.body['email'].trim() === '' || req.body['password'].trim() === '') {
+        res.status(401).redirect('/login?err=ya')
       } else {
         // get users collection from database (maybe make a getUserByEmail function)
-        let userObj = users.find(user => user.username.toLowerCase() === req.body['username'].toLowerCase())
+        let userObj = users.find(user => user.email.toLowerCase() === req.body['email'].toLowerCase())
         if (userObj) {
           let passMatch = await bcrypt.compare(req.body['password'], userObj.hashedPassword)
           .catch((err) => console.error(err))
@@ -40,13 +40,20 @@ const constructorMethod = app => {
             expiresIn.setHours(expiresIn.getHours() + 1)
             req.session.user = userObj
             req.session.cookie.expires = expiresIn
+            console.log(`User ${userObj.email} logged in`)
             res.redirect('/')
             return
           }
         }
         // access denied
-        res.status(401).redirect('login/?err=ya')
+        res.status(401).redirect('login?err=ya')
       }
+    })
+
+    app.get('/logout', (req, res) => {
+      // destroy session & redirect
+      req.session.destroy()
+      res.redirect('/')
     })
 
     // temporary for debugging
