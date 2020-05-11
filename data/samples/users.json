@@ -3,7 +3,7 @@
         "_id": "id0",
         "name": "John Doe",
         "email": "john555@gmail.com",
-        "hashedPassword": "",
+        "hashedPassword": "$2b$10$T9OK5xPKIUHEJey6drhmjeJuPwKm6RSXt2HAs4rahu7OP6VQlP/FK",
         "lessons": [
             "id1"
         ],
@@ -20,7 +20,7 @@
         "_id": "id1",
         "name": "Jenny Wendy",
         "email": "jw400@gmail.com",
-        "hashedPassword": "",
+        "hashedPassword": "$2b$10$IOqqNSgMpcdvFt/dI8.REuyKDemhoP22bZmVzVfbsQDIVkplX1BIK",
         "lessons": [
             "id2"
         ],
@@ -38,7 +38,7 @@
         "_id": "id2",
         "name": "Max Martin",
         "email": "mxm201@gmail.com",
-        "hashedPassword": "",
+        "hashedPassword": "$2b$10$HhA23xG110ivZtRhYJiMZ.YitASECRERmn6yU7t8DxDF0NwxUJGby",
         "lessons": [
             "id1", "id2"
         ],
