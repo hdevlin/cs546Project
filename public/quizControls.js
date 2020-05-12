@@ -1,15 +1,13 @@
-var numQuestions = 0
 var curQuestion = 0
-var questions = null
+var numQuestions = 0
+var questionIds = null
 
-function setup(n) {
+function setup(qids) {
     document.getElementById("prev").addEventListener("click", gotoPrev)
     document.getElementById("next").addEventListener("click", gotoNext)
     document.getElementById("submit").addEventListener("click", submitAnswer)
-    numQuestions = parseInt(n)
-    document.getElementById("prev").setAttribute("disabled", "")
-
-    alert(questions.length)
+    questionIds = qids.split(",")
+    numQuestions = questionIds.length
 }
 
 function submitAnswer() {
@@ -17,12 +15,17 @@ function submitAnswer() {
 }
 
 function gotoPrev() {
-    if (curQuestion > 0) curQuestion--
+    if (curQuestion > 0) {
+        curQuestion--
+        let parentUrl = window.location.href.split('/').slice(0, -1).join('/')
+        window.location.href = parentUrl + "/" + questionIds[curQuestion]
+    }
 }
 
 function gotoNext() {
-    if (curQuestion < numQuestions - 1) curQuestion++
-    let templateScript = Handlebars.compile(document.getElementById("q-title").innerHTML)
-    let html = templateScript()
-    document.getElementById("q-title").innerHTML = html
+    if (curQuestion < numQuestions - 1) {
+        curQuestion++
+        let parentUrl = window.location.href.split('/').slice(0, -1).join('/')
+        window.location.href = parentUrl + "/" + questionIds[curQuestion]
+    }
 }

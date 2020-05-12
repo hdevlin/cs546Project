@@ -8,10 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <link rel="stylesheet" href="/public/site.css">
     <script src="/public/quizControls.js"></script>
 </head>
-<body onload="setup({{reqbody.questions.length}})">
+<body onload="setup('{{reqbody.questions}}')">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -25,7 +26,7 @@
     <main>
     <div class="container">
 
-        <h3 id="q-title">{{reqbody.questions.0.question}}</h3><br>
+        <h3 id="q-title">{{reqbody.curQuestion.question}}</h3><br>
 
         <img src="">
         
@@ -33,13 +34,13 @@
             <table class="table table-borderless">
                 <tbody>
                 <tr>
-                    <td><a href="#" id="q-mc-0" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[0]}}</a></td>
-                    <td><a href="#" id="q-mc-1" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[1]}}</a></td>
+                    <td><a href="#" id="q-mc-0" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[0]}}</a></td>
+                    <td><a href="#" id="q-mc-1" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[1]}}</a></td>
                 </tr>
 
                 <tr>
-                    <td><a href="#" id="q-mc-2" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[2]}}</a></td>
-                    <td><a href="#" id="q-mc-3" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[3]}}</a></td>
+                    <td><a href="#" id="q-mc-2" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[2]}}</a></td>
+                    <td><a href="#" id="q-mc-3" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[3]}}</a></td>
                 </tr>
                 </tbody>
             </table>

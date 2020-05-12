@@ -3,7 +3,9 @@ const reqMain = require('../data/samples/reqbody_main')
 const reqLessons = require('../data/samples/reqbody_lessons')
 const reqProfile = require('../data/samples/reqbody_profile')
 const reqQuestion = require('../data/samples/reqbody_question')
-const users = require('../data/samples/users.json')
+const users = require('../data/samples/users')
+const lessons = require('../data/samples/lessons')
+const questions = require('../data/samples/questions')
 
 const constructorMethod = app => {
     app.get('/', (req, res) => {
@@ -61,9 +63,16 @@ const constructorMethod = app => {
       res.redirect('/')
     })
 
-    // temporary for debugging
-    app.get('/question', (_, res) => {
-      res.render('layouts/question', { layout: false, reqbody: reqQuestion, helpers: { json: function (context) { return JSON.stringify(context) } }})
+    app.get('/question/:id', (req, res) => {
+      // TODO retrieve question from db
+      let questionObj = questions.find(q => q._id === req.params.id)
+      let lessonObj = lessons.find(l => l._id === questionObj.lesson_id)
+      let qReqBody = {
+        lessonTitle: lessonObj.title,
+        questions: lessonObj.questions,
+        curQuestion: questionObj
+      }
+      res.render('layouts/question', { layout: false, reqbody: qReqBody })
     })
     app.post('/question', (_, res) => {
       // add completed question id to user object & update db
