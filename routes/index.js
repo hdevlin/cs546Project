@@ -63,7 +63,11 @@ const constructorMethod = app => {
 
     // temporary for debugging
     app.get('/question', (_, res) => {
-      res.render('layouts/question', { layout: false, reqbody: JSON.stringify(reqQuestion), helpers: { json: function (context) { return JSON.stringify(context) } }})
+      res.render('layouts/question', { layout: false, reqbody: reqQuestion, helpers: { json: function (context) { return JSON.stringify(context) } }})
+    })
+    app.post('/question', (_, res) => {
+      // add completed question id to user object & update db
+      res.redirect('/question')
     })
     
     app.use('*', (_, res) => {

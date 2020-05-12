@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/public/site.css">
     <script src="/public/quizControls.js"></script>
 </head>
-<body onload="setup()">
+<body onload="setup({{reqbody.questions.length}})">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -25,24 +25,32 @@
     <main>
     <div class="container">
 
-        <h3 id="questionText">Question?</h3><br>
+        <h3 id="q-title">{{reqbody.questions.0.question}}</h3><br>
 
         <img src="">
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-                <td><a href="#" class="btn btn-block btn-primary">Ans 1</a></td>
-                <td><a href="#" class="btn btn-block btn-primary">Ans 2</a></td>
-            </tr>
+        
+        <form id="form-question-mc" method="post" action="">
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <td><a href="#" id="q-mc-0" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[0]}}</a></td>
+                    <td><a href="#" id="q-mc-1" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[1]}}</a></td>
+                </tr>
 
-            <tr>
-                <td><a href="#" class="btn btn-block btn-primary">Ans 3</a></td>
-                <td><a href="#" class="btn btn-block btn-primary">Ans 4</a></td>
-            </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <td><a href="#" id="q-mc-2" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[2]}}</a></td>
+                    <td><a href="#" id="q-mc-3" class="btn btn-block btn-primary">{{reqbody.questions.0.choices.[3]}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        
+            <div>
+                <button type="submit" class="btn btn-success" id="submit">Submit</button>
+            </div>
+        </form>
 
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <br>
+        <div class="btn-group" role="group">
             <button type="button" class="btn btn-secondary" id="prev">Previous</button>
             <button type="button" class="btn btn-secondary" id="next">Next</button>
         </div>
