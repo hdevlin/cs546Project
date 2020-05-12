@@ -66,6 +66,7 @@ const constructorMethod = app => {
     app.get('/question/:id', (req, res) => {
       // TODO retrieve question from db
       let questionObj = questions.find(q => q._id === req.params.id)
+      if (!questionObj) res.status(404).json({ error: "Not found" })
       let lessonObj = lessons.find(l => l._id === questionObj.lesson_id)
       let qReqBody = {
         lessonTitle: lessonObj.title,
@@ -74,6 +75,7 @@ const constructorMethod = app => {
       }
       res.render('layouts/question', { layout: false, reqbody: qReqBody })
     })
+    
     app.post('/question', (_, res) => {
       // add completed question id to user object & update db
       res.redirect('/question')
