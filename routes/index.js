@@ -1,8 +1,4 @@
 const bcrypt = require('bcrypt')
-const reqMain = require('../data/samples/reqbody_main')
-const reqLessons = require('../data/samples/reqbody_lessons')
-const reqProfile = require('../data/samples/reqbody_profile')
-const reqQuestion = require('../data/samples/reqbody_question')
 const users = require('../data/samples/users')
 const lessons = require('../data/samples/lessons')
 const questions = require('../data/samples/questions')
@@ -14,7 +10,19 @@ const constructorMethod = app => {
     })
 
     app.get('/lessons', (_, res) => {
-      res.render('layouts/lessons', { layout: false, reqbody: reqLessons })
+      // TODO get all lessons from db
+      res.render('layouts/lessons', { layout: false, reqbody: lessons })
+    })
+
+    app.get('/lesson/:id', (req, res) => {
+      // check if logged in
+      if (!req.session.user) {
+        res.redirect('/login')
+        return
+      }
+      let lessonObj = lessons.find(l => l._id === req.params.id.toLowerCase())
+      if (!lessonObj) res.status(404).json({ error: "Not found" })
+      res.redirect(`/question/${lessonObj.questions[0]}`)
     })
 
     app.get('/profile', (req, res) => {
@@ -64,10 +72,15 @@ const constructorMethod = app => {
     })
 
     app.get('/question/:id', (req, res) => {
+      // check if logged in
+      if (!req.session.user) {
+        res.redirect('/login')
+        return
+      }
       // TODO retrieve question from db
-      let questionObj = questions.find(q => q._id === req.params.id)
+      let questionObj = questions.find(q => q._id === req.params.id.toLowerCase())
       if (!questionObj) res.status(404).json({ error: "Not found" })
-      let lessonObj = lessons.find(l => l._id === questionObj.lesson_id)
+      let lessonObj = lessons.find(l => l._id === questionObj.lesson_id.toLowerCase())
       let qReqBody = {
         lessonTitle: lessonObj.title,
         questions: lessonObj.questions,
@@ -75,9 +88,10 @@ const constructorMethod = app => {
       }
       res.render('layouts/question', { layout: false, reqbody: qReqBody })
     })
-    
-    app.post('/question', (_, res) => {
+
+    app.post('/question', (req, res) => {
       // add completed question id to user object & update db
+      console.log(req.body)
       res.redirect('/question')
     })
     
