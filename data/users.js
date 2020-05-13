@@ -58,7 +58,7 @@ module.exports = {
         const insertInfo = await userCollection.insertOne(newUser);
         if (insertInfo.insertedCount === 0) throw ERRORS.NOMODIFY;
 
-        return insertInfo.insertedId;
+        return this.getUser(insertInfo.insertedId.toString());
     },
 
     /**

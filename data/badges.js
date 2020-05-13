@@ -86,6 +86,16 @@ module.exports = {
         return badge;
     },
 
+    /* Get a badge by name */
+    async getBadgeByName(name) {
+        checkName(name);
+        const badgeCollection = await badges();
+        const badge = await badgeCollection.findOne({ name: name });
+        if (badge === null) throw ERRORS.NOEXIST;
+
+        return badge;
+    },
+
     /* Update a badge by id & options */
     async updateBadge(id, options) {
         checkId(id);

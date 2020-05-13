@@ -4,30 +4,21 @@
         "name": "John Doe",
         "email": "john555@gmail.com",
         "hashedPassword": "$2b$10$T9OK5xPKIUHEJey6drhmjeJuPwKm6RSXt2HAs4rahu7OP6VQlP/FK",
-        "lessons": [
-            "l1"
-        ],
+        "lessons": [],
         "completedLessons": [
-            "l0"
+            "Test Lesson"
         ],
-        "completedQuestions": {
-            "l0": ["q0", "q1"],
-            "l1": ["q2"]
-        },
-        "badges": ["b0"]
+        "completedQuestions": {},
+        "badges": ["Testing Badge"]
     },
     {
         "_id": "u1",
         "name": "Jenny Wendy",
         "email": "jw400@gmail.com",
         "hashedPassword": "$2b$10$IOqqNSgMpcdvFt/dI8.REuyKDemhoP22bZmVzVfbsQDIVkplX1BIK",
-        "lessons": [
-            "l1", "l2"
-        ],
+        "lessons": [],
         "completedLessons": [],
-        "completedQuestions": {
-            "l1": ["q2", "q3"]
-        },
+        "completedQuestions": {},
         "badges": []
     },
     {
@@ -35,13 +26,9 @@
         "name": "Max Martin",
         "email": "mxm201@gmail.com",
         "hashedPassword": "$2b$10$HhA23xG110ivZtRhYJiMZ.YitASECRERmn6yU7t8DxDF0NwxUJGby",
-        "lessons": [
-            "l2"
-        ],
+        "lessons": [],
         "completedLessons": [],
-        "completedQuestions": {
-            "l2": ["q4"]
-        },
+        "completedQuestions": {},
         "badges": []
     }
 ]
