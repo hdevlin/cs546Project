@@ -1,7 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const questions = mongoCollections.questions;
 const lesson = require('./lessons');
-const uuid = require('uuid/v4');
 const ERRORS = require("./common").ERRORS;
 
 /**
@@ -34,7 +33,6 @@ const exportedMethods = {
 
         const newQuestion = {
             question: question,
-            _id: uuid(),
             lesson:{
                 id:lessonId,
                 name: `${questionLesson.title}`
