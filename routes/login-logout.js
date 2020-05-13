@@ -1,7 +1,26 @@
 const express = require("express");
 const users = require("../data/users");
+const lessons = require("../data/lessons");
+const badges = require("../data/badges");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+
+async function updateUserObject(userObj) {
+    // change ids to objects
+    for (var i in userObj['lessons']) {
+        const gotLesson = await lessons.getLesson(userObj['lessons'][i]);
+        userObj['lessons'][i] = gotLesson;
+    }
+    for (var i in userObj['completedLessons']) {
+        const gotLesson = await lessons.getLesson(userObj['completedLessons'][i]);
+        userObj['completedLessons'][i] = gotLesson;
+    }
+    for (var i in userObj['badges']) {
+        const gotBadge = await badges.getBadge(userObj['badges'][i]);
+        userObj['badges'][i] = gotBadge;
+    }
+    return userObj;
+}
 
 router.get("/login", async (_, res) => {
     res.render("login", { layout: false });
@@ -36,7 +55,7 @@ router.post("/login", async (req, res) => {
                 // create cookie, set expiration, redirect
                 let expiresIn = new Date();
                 expiresIn.setHours(expiresIn.getHours() + 1);
-                req.session.user = gotUser;
+                req.session.user = await updateUserObject(gotUser);
                 req.session.cookie.expires = expiresIn;
                 console.log(`User ${gotUser.email} logged in`);
                 res.redirect("/");

@@ -1,6 +1,7 @@
 const express = require("express");
 const questions = require("../data/questions");
 const lessons = require("../data/lessons");
+const users = require("../data/users");
 const router = express.Router();
 
 router.get("/question/:id", async (req, res) => {
@@ -24,9 +25,11 @@ router.get("/question/:id", async (req, res) => {
 });
 
 router.post("/question", async (req, res) => {
-    // add completed question id to user object & update db
-    console.log(req.body);
-    res.redirect("/question");
+    // update db with completed question id
+    if (!req.body.completedQuestion) return;
+    const updatedUser = await users.updateCompletedQuestion(req.session.user._id.toString(), req.body.completedQuestion);
+    req.session.user = updatedUser;
+    res.redirect("#");
 });
 
 module.exports = router;
