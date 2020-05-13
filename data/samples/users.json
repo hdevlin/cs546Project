@@ -4,7 +4,7 @@
         "name": "John Doe",
         "email": "john555@gmail.com",
         "hashedPassword": "$2b$10$T9OK5xPKIUHEJey6drhmjeJuPwKm6RSXt2HAs4rahu7OP6VQlP/FK",
-        "lessons": [],
+        "lessons": ["Test Lesson"],
         "completedLessons": [
             "Test Lesson"
         ],

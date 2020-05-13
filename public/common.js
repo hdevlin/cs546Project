@@ -24,10 +24,18 @@ function setup() {
     for (let i = 0; i < elems.length; ++i) {
         elems[i].addEventListener("click", startClick);
     }
+    elems = document.getElementsByClassName("drop-lesson");
+    for (let i = 0; i < elems.length; ++i) {
+        elems[i].addEventListener("click", dropClick);
+    }
 }
 
 /* Launch lesson */
 function startClick() {
     let parentUrl = window.location.href.split('/').slice(0, -1).join('/');
     window.location.href = parentUrl + `/lesson/${event.target.id}`;
+}
+
+function dropClick() {
+    alert("dropped");
 }
