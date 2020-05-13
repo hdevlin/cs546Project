@@ -1,29 +1,29 @@
 const mongoCollections = require("../config/mongoCollections");
 const lessons = mongoCollections.lessons;
-// const ObjectID = require("mongodb").ObjectID;
-// const uuid = require('uuid/v4');
+const { ObjectId } = require('mongodb');
 const ERRORS = require("./common").ERRORS;
 
-// TODO: all checks must be improved
 function checkId(id) {
-    if (!id) throw "You must provide an id to search for";
+    if (!id || typeof id != 'string') throw "You must provide an id to search for";
 }
 
 function checkTitle(title) {
-    if (!title) throw "You must provide an title";
+    if (!title || typeof title != 'string') throw "You must provide an title";
 }
 
-function checkSubject(email) {
-    if (!email) throw "You must provide an email";
+function checkSubject(subject) {
+    if (!subject || typeof subject != 'string') throw "You must provide a subject";
 }
 
-function checkDifficulty(password) {
-    if (!password) throw "You must input a password";
-    // TODO: Check based on password criteria (min 5 chars, etc.)
+function checkDifficulty(difficulty) {
+    if (!difficulty) throw "You must input a difficulty";
+    if (typeof difficulty != 'number' || difficulty < 1 || difficulty > 3) {
+        throw "Difficulty should be a number in range 1-3";
+    }
 }
 
 /**
- * Lesson = {
+ * lessons = {
  *    _id: string
  *    title: string
  *    subject: string
@@ -39,19 +39,18 @@ module.exports = {
      * @param {string} subject
      * @param {number} difficulty
      */
-    async addLesson(title, subject, difficulty, questions, badges) {
+    async addLesson(title, subject, difficulty) {
         checkTitle(title);
         checkSubject(subject);
         checkDifficulty(difficulty);
-        // TODO
-        // checkQuestions(questions)
-        // checkBadges(badges)
+        // lesson is updated with questions & badges
+
         const lessonCollection = await lessons();
 
         const newLesson = {
             title: title,
             subject: subject,
-            difficulty: difficulty, // TODO: hash and salt the password
+            difficulty: difficulty,
             questions: [],
             badges: [],
         };
@@ -63,7 +62,7 @@ module.exports = {
     },
 
     /**
-     *
+     * Get all lessons as array of objects
      */
     async getAllLessons() {
         const lessonCollection = await lessons();
@@ -77,10 +76,25 @@ module.exports = {
      */
     async getLesson(id) {
         checkId(id);
+        const objId = ObjectId.createFromHexString(id);
+
         const lessonCollection = await lessons();
         const lesson = await lessonCollection.findOne({
-            // _id: new ObjectID(id),
-            _id:id
+            _id: objId
+        });
+        if (lesson === null) throw ERRORS.NOEXIST;
+
+        return lesson;
+    },
+
+    async getLessonByName(name) {
+        if (!name || typeof name != 'string') {
+            throw "You must provide a valid lesson name to look for";
+        }
+
+        const lessonCollection = await lessons();
+        const lesson = await lessonCollection.findOne({
+            name: name
         });
         if (lesson === null) throw ERRORS.NOEXIST;
 
@@ -92,29 +106,31 @@ module.exports = {
      * @param {string} id
      * @param {{}} options
      */
-    async updateLesson(id, options = {}) {
+    async updateLesson(id, options) {
         checkId(id);
-        // TODO: check the options object
+        if (!options) throw "Options must be provided to update";
+        const objId = ObjectId.createFromHexString(id);
 
         const lessonCollection = await lessons();
         let originalLesson = await this.getLesson(id);
 
-        const updateAlbum = {};
-
-        if (options.name) {
-            updateAlbum.name = options.name;
-        } else {
-            updateAlbum.name = originalLesson.name;
+        const updatedLesson = {};
+        const allOptions = ['title', 'subject', 'difficulty', 'questions', 'badges']
+        for (var i in allOptions) {
+            let op = allOptions[i];
+            if (options[allOptions[i]]) {
+                updatedLesson[op] = options[op];
+            } else {
+                updatedLesson[op] = originalLesson[op];
+            }
         }
 
         const updatedInfo = await lessonCollection.updateOne(
             { 
-                // _id: new ObjectID(id) 
-                _id:id
+                _id: objId
             },
             {
-                $set: { name: updateAlbum.name },
-                // TODO: update this query
+                $set: updatedLesson,
             }
         );
         if (updatedInfo.modifiedCount === 0) {
@@ -124,51 +140,63 @@ module.exports = {
         return await this.getLesson(id);
     },
 
-    async addQuestionToLesson(lessonId, questionId, question){
-        let currentLesson = await this.getLesson(lessonId);
+    /*
+     * Add a question to the lesson by id
+     */
+    async addQuestionToLesson(lessonId, questionId, question) {
+        checkId(lessonId);
+        checkId(questionId);
+        if (!question) throw "You must provide a question to add"
+        const lessonObjId = ObjectId.createFromHexString(lessonId);
 
         const lessonCollection = await lessons();
         const updateInfo = await lessonCollection.updateOne(
-            {_id: lessonId},
-            { $addToSet: {question: { id: questionId, question: question}}}
+            { _id: lessonObjId },
+            { $addToSet: { questions: questionId }}
         );
 
-        if(!updateInfo.matchedCount && !updateInfo.modifiedCount){
-            throw 'Add Question failed';
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) {
+            throw "Add Question failed";
         }
 
         return await this.getLesson(lessonId);
     },
 
-    async removeQuestionfromLesson(lessonId, questionId){
-        let currentLesson = await this.getLesson(lessonId);
+    /*
+     * Remove a question from a lesson by id
+     */
+    async removeQuestionfromLesson(lessonId, questionId) {
+        checkId(lessonId);
+        checkId(questionId);
+        const lessonObjId = ObjectId.createFromHexString(lessonId);
 
         const lessonCollection = await lesson();
-        const updateInfo = await userCollection.updateOne(
-            {_id: lessonId},
-            {$pull: { question: { id: questionId}}}
+        const updateInfo = await lessonCollection.updateOne(
+            { _id: lessonObjId },
+            { $pull: { questions: questionId }}
         );
-        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw 'Update failed';
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) {
+            throw "Update failed";
+        }
 
-      return await this.getLesson(lessonId);
+        return await this.getLesson(lessonId);
     },
 
+    /*
+     * Remove a lesson by id
+     */
     async removeLesson(id) {
         checkId(id);
-
-        const lesson = await this.getLesson(id);
+        const objId = ObjectId.createFromHexString(id);
 
         const lessonCollection = await lessons();
-
         const deletionInfo = await lessonCollection.deleteOne({
-            // _id: new ObjectID(id),
-            _id:id
+            _id: objId
         });
         if (deletionInfo.deletedCount === 0) {
             throw ERRORS.NOMODIFY;
         }
 
-        return lesson;
-    },
+        return true;
+    }
 };
