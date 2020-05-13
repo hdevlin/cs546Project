@@ -38,6 +38,20 @@ async function main() {
     }
 
     // add sample badges
+    console.log(`Adding ${bSample.length} badges`)
+    for (var i in bSample) {
+        let b = bSample[i]
+        await badges.addBadge(b.name, b.requirements, b.description, b.file)
+        .catch((err) => console.log(err))
+
+        // // get corresponding lessons & update them
+        // for (var i in b.requirements) {
+        //     let lessonName = b.requirements[i]
+        //     await lessons.updateLesson()
+        // }
+        // const badgeLesson
+    }
+
     // add sample users
 
 	await db.serverConfig.close()

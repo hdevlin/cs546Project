@@ -1,5 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const badges = mongoCollections.badges;
+const lesson = require('./lessons');
 const { ObjectId } = require('mongodb');
 const ERRORS = require("./common").ERRORS;
 
@@ -27,7 +28,7 @@ function checkFile(file) {
  * Badge = {
  *    _id: string
  *    name: string
- *    requirements: string
+ *    requirements: array
  *    description: string
  *    file: string
  * }
@@ -53,7 +54,15 @@ module.exports = {
         const insertInfo = await badgeCollection.insertOne(newBadge);
         if (insertInfo.insertedCount === 0) throw ERRORS.NOMODIFY;
 
-        return insertInfo.insertedId;
+        // update badges in lesson
+        for (var i in requirements) {
+            let badgeLesson = await lesson.getLessonByName(requirements[i]);
+            if (!badgeLesson) throw "New badge does not require a valid lesson";
+            badgeLesson.badges.push(insertInfo.insertedId.toString());
+            await lesson.updateLesson(badgeLesson._id.toString(), { badges: badgeLesson.badges });
+        }
+
+        return this.getBadge(insertInfo.insertedId.toString());
     },
 
     /**
@@ -92,6 +101,15 @@ module.exports = {
             let op = allOptions[i];
             if (options[allOptions[i]]) {
                 updatedBadge[op] = options[op];
+                if (op == 'requirements') {
+                    // need to update badges in lesson
+                    for (var i in options['requirements']) {
+                        let badgeLesson = await lesson.getLessonByName(options['requirements'][i]);
+                        if (!badgeLesson) throw "New badge does not require a valid lesson";
+                        badgeLesson.badges.push(id);
+                        await lesson.updateLesson(badgeLesson._id.toString(), { badges: badgeLesson.badges });
+                    }
+                }
             } else {
                 updatedBadge[op] = originalBadge[op];
             }
