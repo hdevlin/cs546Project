@@ -1,4 +1,5 @@
 const express = require("express");
+const xss = require("xss");
 const questions = require("../data/questions");
 const lessons = require("../data/lessons");
 const users = require("../data/users");
@@ -21,7 +22,10 @@ router.get("/question/:id", async (req, res) => {
         questions: gotLesson.questions,
         curQuestion: gotQuestion,
     };
-    res.render("layouts/question", { layout: false, reqbody: qReqBody });
+    res.render("layouts/question", {
+        layout: false,
+        reqbody: JSON.parse(xss(JSON.stringify(qReqBody)))
+    });
 });
 
 router.post("/question", async (req, res) => {

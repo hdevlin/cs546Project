@@ -1,4 +1,5 @@
 const express = require("express");
+const xss = require("xss");
 const lessons = require("../data/lessons");
 const badges = require("../data/badges");
 const users = require("../data/users");
@@ -15,7 +16,7 @@ router.get("/lessons", async (_, res) => {
         }
         gotLessons[i].badges = badgesObjs;
     }
-    res.render("layouts/lessons", { layout: false, reqbody: gotLessons });
+    res.render("layouts/lessons", { layout: false, reqbody: JSON.parse(xss(JSON.stringify(gotLessons))) });
 });
 
 router.get("/lesson/:id", async (req, res) => {

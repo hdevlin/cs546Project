@@ -1,3 +1,4 @@
+const xss = require("xss");
 const lessonsRoute = require("./lessons");
 const questionRoute = require("./question");
 const profileRoute = require("./profile");
@@ -26,7 +27,7 @@ const constructorMethod = (app) => {
         }
         res.render("layouts/main", {
             layout: false,
-            reqbody: userObj
+            reqbody: JSON.parse(xss(JSON.stringify(userObj)))
         });
     });
 
