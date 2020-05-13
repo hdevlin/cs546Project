@@ -1,5 +1,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
+const lessons = require('./lessons');
+const questions = require('./questions');
 const { ObjectId } = require('mongodb');
 const ERRORS = require("./common").ERRORS;
 
@@ -108,7 +110,7 @@ module.exports = {
         const userCollection = await users();
         let originalUser = await this.getUser(id);
 
-        const updatedUser = {};
+        let updatedUser = {};
         const allOptions = ['name', 'email', 'hashedPassword', 'lessons', 'completedLessons', 'completedQuestions', 'badges']
         for (var i in allOptions) {
             let op = allOptions[i];
@@ -117,6 +119,42 @@ module.exports = {
             } else {
                 updatedUser[op] = originalUser[op];
             }
+        }
+
+        const updatedInfo = await userCollection.updateOne(
+            { 
+                _id: objId
+            },
+            {
+                $set: updatedUser,
+            }
+        );
+        if (updatedInfo.modifiedCount === 0) {
+            throw ERRORS.NOMODIFY;
+        }
+
+        return await this.getUser(id);
+    },
+
+    /* Update a user with a completed question id */
+    async updateCompletedQuestion(id, completedQuestionId) {
+        checkId(id);
+        checkId(completedQuestionId);
+        const objId = ObjectId.createFromHexString(id);
+
+        const userCollection = await users();
+        const originalUser = await this.getUser(id);
+        const gotQuestion = await questions.getQuestion(completedQuestionId);
+        let lessonId = gotQuestion.lesson_id;
+        const gotLesson = await lessons.getLesson(lessonId);
+
+        let updatedUser = originalUser;
+        updatedUser.completedQuestions[lessonId].push(completedQuestionId);
+        if (updatedUser.completedQuestions[lessonId].length == gotLesson.questions.length) {
+            // completed lesson
+            updatedUser.completedLessons.push(lessonId);
+            updatedUser.lessons = updatedUser.lessons.filter((lId) => lId != lessonId);
+            delete updatedUser.completedQuestions[lessonId];
         }
 
         const updatedInfo = await userCollection.updateOne(
