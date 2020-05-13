@@ -1,6 +1,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const lessons = mongoCollections.lessons;
-const ObjectID = require("mongodb").ObjectID;
+// const ObjectID = require("mongodb").ObjectID;
+// const uuid = require('uuid/v4');
 const ERRORS = require("./common").ERRORS;
 
 // TODO: all checks must be improved
@@ -51,8 +52,8 @@ module.exports = {
             title: title,
             subject: subject,
             difficulty: difficulty, // TODO: hash and salt the password
-            questions: questions,
-            badges: badges,
+            questions: [],
+            badges: [],
         };
 
         const insertInfo = await lessonCollection.insertOne(newLesson);
@@ -78,7 +79,8 @@ module.exports = {
         checkId(id);
         const lessonCollection = await lessons();
         const lesson = await lessonCollection.findOne({
-            _id: new ObjectID(id),
+            // _id: new ObjectID(id),
+            _id:id
         });
         if (lesson === null) throw ERRORS.NOEXIST;
 
@@ -106,7 +108,10 @@ module.exports = {
         }
 
         const updatedInfo = await lessonCollection.updateOne(
-            { _id: new ObjectID(id) },
+            { 
+                // _id: new ObjectID(id) 
+                _id:id
+            },
             {
                 $set: { name: updateAlbum.name },
                 // TODO: update this query
@@ -119,6 +124,26 @@ module.exports = {
         return await this.getLesson(id);
     },
 
+    async addQuestionToLesson(lessonId, questionId, question){
+        let currentLesson = await this.getLesson(lessonId);
+
+        const lessonCollection = await lessons();
+        const updateInfo = await lessonCollection.updateOne(
+            {_id: lessonId},
+            { $addToSet: {question: { id: questionId, question: question}}}
+        );
+
+        if(!updateInfo.matchedCount && !updateInfo.modifiedCount){
+            throw 'Add Question failed';
+        }
+
+        return await this.getLesson(lessonId);
+    },
+
+    async removeQuestionfromLesson(lessonId, questionId){
+
+    },
+
     async removeLesson(id) {
         checkId(id);
 
@@ -127,7 +152,8 @@ module.exports = {
         const lessonCollection = await lessons();
 
         const deletionInfo = await lessonCollection.deleteOne({
-            _id: new ObjectID(id),
+            // _id: new ObjectID(id),
+            _id:id
         });
         if (deletionInfo.deletedCount === 0) {
             throw ERRORS.NOMODIFY;
