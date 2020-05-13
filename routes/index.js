@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const users = require('../data/samples/users')
 const lessons = require('../data/samples/lessons')
 const questions = require('../data/samples/questions')
+const saltRounds = 10
 
 const constructorMethod = app => {
     app.get('/', (req, res) => {
@@ -40,7 +41,7 @@ const constructorMethod = app => {
     app.post('/login', async (req, res) => {
       // attempt to login user with provided credentials
       if (!req.body['email'] || !req.body['password'] || req.body['email'].trim() === '' || req.body['password'].trim() === '') {
-        res.status(401).redirect('/login?err=ya')
+        res.status(401).render('login', { layout: false, errorMsg: "Invalid login" })
       } else {
         // TODO get users collection from database (maybe make a getUserByEmail function)
         let userObj = users.find(user => user.email.toLowerCase() === req.body['email'].toLowerCase())
@@ -59,7 +60,7 @@ const constructorMethod = app => {
           }
         }
         // access denied
-        res.status(401).redirect('login?err=ya')
+        res.status(401).render('login', { layout: false, errorMsg: "Invalid login" })
       }
     })
 
@@ -69,6 +70,18 @@ const constructorMethod = app => {
       req.session.destroy()
       console.log(`User ${userEmail} logged out`)
       res.redirect('/')
+    })
+
+    app.post('/signup', (req, res) => {
+      // create a new account with provided details
+      if (!req.body['name'] || !req.body['email'] || !req.body['password'] || req.body['name'].trim() === '' || req.body['email'].trim() === '' || req.body['password'].trim() === '') {
+        res.status(401).render('login', { layout: false, errorMsg: "Could not create your account. Check the entered info and try again." })
+      } else {
+        // TODO put in db
+        const passHash = bcrypt.hashSync(req.body['password'], bcrypt.genSaltSync(saltRounds))
+        res.render('login', { layout: false, successMsg: "Account created! Now, log in." })
+        console.log(`User ${req.body.email} signed up`)
+      }
     })
 
     app.get('/question/:id', (req, res) => {
