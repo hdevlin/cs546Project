@@ -12,15 +12,15 @@ const constructorMethod = (app) => {
         if (req.session.user) {
             userObj = req.session.user;
             for (var i in userObj['lessons']) {
-                const gotLesson = await lessons.getLesson(userObj['lessons'][i]);
+                const gotLesson = await lessons.getLesson(userObj['lessons'][i]._id.toString());
                 userObj['lessons'][i] = gotLesson;
             }
             for (var i in userObj['completedLessons']) {
-                const gotLesson = await lessons.getLesson(userObj['completedLessons'][i]);
+                const gotLesson = await lessons.getLesson(userObj['completedLessons'][i]._id.toString());
                 userObj['completedLessons'][i] = gotLesson;
             }
             for (var i in userObj['badges']) {
-                const gotBadge = await badges.getBadge(userObj['badges'][i]);
+                const gotBadge = await badges.getBadge(userObj['badges'][i]._id.toString());
                 userObj['badges'][i] = gotBadge;
             }
         }

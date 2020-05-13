@@ -36,6 +36,13 @@ function startClick() {
     window.location.href = parentUrl + `/lesson/${event.target.id}`;
 }
 
+/* Remove lesson from user's lessons */
 function dropClick() {
-    alert("dropped");
+    $.ajax({
+        type: "POST",
+        url: "/lesson",
+        data: {
+            dropLesson: event.target.id
+        }
+    })
 }

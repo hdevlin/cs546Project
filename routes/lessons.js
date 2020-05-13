@@ -1,6 +1,7 @@
 const express = require("express");
 const lessons = require("../data/lessons");
 const badges = require("../data/badges");
+const users = require("../data/users");
 const questions = require("../data/questions");
 const router = express.Router();
 
@@ -42,5 +43,15 @@ router.get("/lesson/:id", async (req, res) => {
     gotLesson.badges = badgesObjs;
     res.redirect(`/question/${gotLesson.questions[0]._id.toString()}`);
 });
+
+router.post("/lesson", async (req, res) => {
+    // update db with removed lesson
+    if (!req.body.dropLesson) return;
+    console.log(req.body.dropLesson);
+    const updatedUser = await users.updateRemovedLesson(req.session.user._id.toString(), req.body.dropLesson);
+    console.log(updatedUser);
+    req.session.user = updatedUser;
+    res.redirect("/");
+})
 
 module.exports = router;

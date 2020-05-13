@@ -26,7 +26,9 @@ router.get("/question/:id", async (req, res) => {
 
 router.post("/question", async (req, res) => {
     // update db with completed question id
-    await users.updateCompletedQuestion(req.session.user._id.toString(), req.body.completedQuestion);
+    if (!req.body.completedQuestion) return;
+    const updatedUser = await users.updateCompletedQuestion(req.session.user._id.toString(), req.body.completedQuestion);
+    req.session.user = updatedUser;
     res.redirect("#");
 });
 

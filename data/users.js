@@ -172,6 +172,32 @@ module.exports = {
         return await this.getUser(id);
     },
 
+    async updateRemovedLesson(id, lessonId) {
+        checkId(id);
+        checkId(lessonId);
+        const objId = ObjectId.createFromHexString(id);
+
+        const userCollection = await users();
+        const originalUser = await this.getUser(id);
+
+        let updatedUser = originalUser;
+        updatedUser.lessons = updatedUser.lessons.filter((lId) => lId != lessonId);
+
+        const updatedInfo = await userCollection.updateOne(
+            { 
+                _id: objId
+            },
+            {
+                $set: updatedUser,
+            }
+        );
+        if (updatedInfo.modifiedCount === 0) {
+            throw ERRORS.NOMODIFY;
+        }
+
+        return await this.getUser(id);
+    },
+
     /* Remove a user by id */
     async removeUser(id) {
         checkId(id);
