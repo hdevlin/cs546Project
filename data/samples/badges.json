@@ -4,5 +4,41 @@
         "name": "Testing Badge",
         "requirements": "l0",
         "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b1",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b2",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b3",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b4",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b5",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
+    },
+    {
+        "_id": "b6",
+        "name": "Testing Badge",
+        "requirements": "l0",
+        "description": "You have completed the testing lesson!"
     }
 ]

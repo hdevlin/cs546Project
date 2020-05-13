@@ -49,7 +49,11 @@
                         <li>{{questions.length}} questions</li>
                     </ul>
                 </td>
-                <td>[Badge icons]</td>
+                <td>
+                    {{#each badges}}
+                    <img class="badge-icon rounded-circle" src="/public/images/{{this}}.png">
+                    {{/each}}
+                </td>
                 <td><a id="{{_id}}" class="btn btn-success start">Start</a></td>
             </tr>
             {{/each}}

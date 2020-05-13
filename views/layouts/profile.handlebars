@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col-md-12 dashboard-column">
-                <img id="profile_photo" src="/public/profile.png">
+                <img id="profile_photo" src="/public/images/profile.png">
                 <h2 id="name">{{reqbody.name}}</h2>
                 <h4 id="email">{{reqbody.email}}</h4>
                 <br>
@@ -91,8 +91,9 @@
                 <!--
                     Populate using request body
                 -->
-                <img src="/public/badge-0.png" class="badge-icon rounded-circle">
-                <img src="/public/badge-0.png" class="badge-icon rounded-circle">
+                {{#each reqbody.badges}}
+                <img class="badge-icon rounded-circle" src="/public/images/{{this}}.png">
+                {{/each}}
 
             </div>
         </div>
