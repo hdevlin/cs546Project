@@ -13,7 +13,7 @@ function checkQuestion(question) {
 }
 
 function checkChoices(choices) {
-    if (!choices || typeof choices != 'array') throw "You must provide an array of choices";
+    if (!choices || typeof choices != 'object') throw "You must provide an array of choices";
 }
 
 function checkAnswer(answer, choices) {
@@ -72,7 +72,7 @@ module.exports = {
         const newQuestionInformation = await questionsCollection.insertOne(newQuestion);
         if (newQuestionInformation.insertedCount === 0) throw ERRORS.NOMODIFY;
 
-        return newQuestionInformation.insertedId;
+        return this.getQuestion(newQuestionInformation.insertedId.toString());
     },
 
     /* Update a question by id & options */

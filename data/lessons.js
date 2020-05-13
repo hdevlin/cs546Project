@@ -34,7 +34,7 @@ function checkDifficulty(difficulty) {
  */
 module.exports = {
     /**
-     *
+     * Add a lesson
      * @param {string} title
      * @param {string} subject
      * @param {number} difficulty
@@ -43,7 +43,6 @@ module.exports = {
         checkTitle(title);
         checkSubject(subject);
         checkDifficulty(difficulty);
-        // lesson is updated with questions & badges
 
         const lessonCollection = await lessons();
 
@@ -58,7 +57,7 @@ module.exports = {
         const insertInfo = await lessonCollection.insertOne(newLesson);
         if (insertInfo.insertedCount === 0) throw ERRORS.NOMODIFY;
 
-        return insertInfo.insertedId;
+        return this.getLesson(insertInfo.insertedId.toString());
     },
 
     /**
@@ -71,7 +70,7 @@ module.exports = {
     },
 
     /**
-     *
+     * Get lesson by id
      * @param {string} id
      */
     async getLesson(id) {
@@ -94,7 +93,7 @@ module.exports = {
 
         const lessonCollection = await lessons();
         const lesson = await lessonCollection.findOne({
-            name: name
+            title: name
         });
         if (lesson === null) throw ERRORS.NOEXIST;
 
@@ -102,7 +101,7 @@ module.exports = {
     },
 
     /**
-     *
+     * Update lesson by id & options
      * @param {string} id
      * @param {{}} options
      */
@@ -143,10 +142,9 @@ module.exports = {
     /*
      * Add a question to the lesson by id
      */
-    async addQuestionToLesson(lessonId, questionId, question) {
+    async addQuestionToLesson(lessonId, questionId) {
         checkId(lessonId);
         checkId(questionId);
-        if (!question) throw "You must provide a question to add"
         const lessonObjId = ObjectId.createFromHexString(lessonId);
 
         const lessonCollection = await lessons();

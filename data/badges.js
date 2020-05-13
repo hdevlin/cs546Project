@@ -12,7 +12,7 @@ function checkName(name) {
 }
 
 function checkReq(requirements) {
-    if (!requirements || typeof requirements != 'array') throw "You must provide a list of required lesson ids";
+    if (!requirements || typeof requirements != 'object') throw "You must provide a list of required lesson ids";
 }
 
 function checkDesc(description) {
