@@ -141,7 +141,17 @@ module.exports = {
     },
 
     async removeQuestionfromLesson(lessonId, questionId){
+        let currentLesson = await this.getLesson(lessonId);
 
+        const lessonCollection = await lesson();
+        const updateInfo = await userCollection.updateOne(
+            {_id: lessonId},
+            {$pull: { question: { id: questionId}}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+      throw 'Update failed';
+
+      return await this.getLesson(lessonId);
     },
 
     async removeLesson(id) {
