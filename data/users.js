@@ -85,6 +85,17 @@ module.exports = {
         return user;
     },
 
+    /* Get a user by email */
+    async getUserByEmail(email) {
+        checkEmail(email);
+
+        const userCollection = await users();
+        const user = await userCollection.findOne({ email: email });
+        if (user === null) throw ERRORS.NOEXIST;
+
+        return user;
+    },
+
     /**
      * Update a user by id & options
      * @param {string} id

@@ -1,6 +1,6 @@
 const express = require("express");
-const lessons = require("../data/samples/lessons");
-const questions = require("../data/samples/questions");
+const questions = require("../data/questions");
+const lessons = require("../data/lessons");
 const router = express.Router();
 
 router.get("/question/:id", async (req, res) => {
@@ -9,18 +9,16 @@ router.get("/question/:id", async (req, res) => {
         res.redirect("/login");
         return;
     }
-    // TODO retrieve question from db
-    let questionObj = questions.find(
-        (q) => q._id === req.params.id.toLowerCase()
-    );
-    if (!questionObj) res.status(404).json({ error: "Not found" });
-    let lessonObj = lessons.find(
-        (l) => l._id === questionObj.lesson_id.toLowerCase()
-    );
+    const gotQuestion = await questions.getQuestion(req.params.id.toLowerCase());
+    if (!gotQuestion) {
+        res.status(404).json({ error: "Not found" });
+        return;
+    }
+    const gotLesson = await lessons.getLesson(gotQuestion.lesson_id);
     let qReqBody = {
-        lessonTitle: lessonObj.title,
-        questions: lessonObj.questions,
-        curQuestion: questionObj,
+        lessonTitle: gotLesson.title,
+        questions: gotLesson.questions,
+        curQuestion: gotQuestion,
     };
     res.render("layouts/question", { layout: false, reqbody: qReqBody });
 });
