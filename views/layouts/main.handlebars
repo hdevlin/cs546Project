@@ -27,7 +27,8 @@
         <div class="row">
             <div class="col-md-12 dashboard-column">
                 <h2 id="ip">Lessons In Progress</h2>
-                {{#if reqbody.auth}}
+                {{#if reqbody.email}}
+                    <p>Welcome back, {{reqbody.name}}. <a href="/logout">Logout?</a></p>
                 {{else}}
                     <p><a href="/login">Login</a> to track your progress!</p>
                 {{/if}}
@@ -36,7 +37,7 @@
                     Populate using request body
                 -->
                 {{#each reqbody.lessons}}
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                     {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
                     <div class="card-body">
                         <h4 class="card-title">{{title}}</h4>

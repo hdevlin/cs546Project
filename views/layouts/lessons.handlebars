@@ -10,8 +10,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/site.css">
     <script src="/public/script.js"></script>
+    <script src="/public/lessonsPage.js"></script>
 </head>
-<body onload="changeDifficultyText()">
+<body onload="changeDifficultyText(); setup();">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -41,15 +42,15 @@
             -->
             {{#each reqbody}}
             <tr>
-                <td>{{subject}}</td>
-                <td>{{title}}
+                <td class="left-col">{{subject}}</td>
+                <td class="left-col">{{title}}
                     <ul>
                         <li class="diff">{{difficulty}}</li>
                         <li>{{questions.length}} questions</li>
                     </ul>
                 </td>
                 <td>[Badge icons]</td>
-                <td><a href="#" class="btn btn-success">Start</a></td>
+                <td><a id="{{_id}}" class="btn btn-success start">Start</a></td>
             </tr>
             {{/each}}
 

@@ -29,7 +29,7 @@
             <div class="col-md-12 dashboard-column">
                 <img id="profile_photo" src="/public/profile.png">
                 <h2 id="name">{{reqbody.name}}</h2>
-                <h4 id="username_email">{{reqbody.username}} [{{reqbody.email}}]</h4>
+                <h4 id="email">{{reqbody.email}}</h4>
                 <br>
                 <p>Completed Lessons: {{reqbody.completedLessons.length}}</p>
                 <p>Badges Earned: {{reqbody.badges.length}}</p>
@@ -44,7 +44,7 @@
                     Populate using request body
                 -->
                 {{#each reqbody.lessons}}
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                     {{!-- <img class="card-img-top" src="" alt="[subject image]"> --}}
                     <div class="card-body">
                         <h4 class="card-title">{{title}}</h4>

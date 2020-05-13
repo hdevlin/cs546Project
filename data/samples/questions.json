@@ -1,0 +1,18 @@
+[
+    {
+        "_id": "q0",
+        "question": "What is 2 + 2?",
+        "type": "choice",
+        "choices": ["0", "2", "4", "5"],
+        "answer": "4",
+        "lesson_id": "l0"
+    },
+    {
+        "_id": "q1",
+        "question": "What is 4 * 4?",
+        "type": "choice",
+        "choices": ["1", "4", "8", "16"],
+        "answer": "16",
+        "lesson_id": "l0"
+    }
+]
