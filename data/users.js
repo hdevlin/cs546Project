@@ -1,24 +1,22 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
-const ObjectID = require("mongodb").ObjectID;
+const { ObjectId } = require('mongodb');
 const ERRORS = require("./common").ERRORS;
 
-// TODO: all checks must be improved
 function checkId(id) {
-    if (!id) throw "You must provide an id to search for";
+    if (!id || typeof id != 'string') throw "You must provide an id to search for";
 }
 
 function checkName(name) {
-    if (!name) throw "You must provide an name";
+    if (!name || typeof name != 'string') throw "You must provide an name";
 }
 
 function checkEmail(email) {
-    if (!email) throw "You must provide an email";
+    if (!email || typeof email != 'string') throw "You must provide an email";
 }
 
-function checkPassword(password) {
-    if (!password) throw "You must input a password";
-    // TODO: Check based on password criteria (min 5 chars, etc.)
+function checkPassword(hashedPassword) {
+    if (!hashedPassword || typeof hashedPassword != 'string') throw "You must provide a password hash";
 }
 
 /**
@@ -28,28 +26,33 @@ function checkPassword(password) {
  *    email: string
  *    hashedPassword: string
  *    lessons: array
+ *    completedLessons: array
  *    completedQuestions: subdocument
  *    badges: array
  * }
  */
 module.exports = {
     /**
-     *
+     * Add a user
      * @param {string} name
      * @param {string} email
-     * @param {string[]} password
+     * @param {string[]} hashedPassword
      */
-    async addUser(name, email, password) {
+    async addUser(name, email, hashedPassword) {
         checkName(name);
         checkEmail(email);
-        checkPassword(password);
+        checkPassword(hashedPassword);
 
         const userCollection = await users();
 
         const newUser = {
             name: name,
             email: email,
-            password: password, // TODO: hash and salt the password
+            hashedPassword: hashedPassword,
+            lessons: [],
+            completedLessons: [],
+            completedQuestions: {},
+            badges: []
         };
 
         const insertInfo = await userCollection.insertOne(newUser);
@@ -59,7 +62,7 @@ module.exports = {
     },
 
     /**
-     *
+     * Get all users as array of objects
      */
     async getAllUsers() {
         const userCollection = await users();
@@ -68,43 +71,49 @@ module.exports = {
     },
 
     /**
-     *
+     * Get a user by id
      * @param {string} id
      */
     async getUser(id) {
         checkId(id);
+        const objId = ObjectId.createFromHexString(id);
+
         const userCollection = await users();
-        const user = await userCollection.findOne({ _id: new ObjectID(id) });
+        const user = await userCollection.findOne({ _id: objId });
         if (user === null) throw ERRORS.NOEXIST;
 
         return user;
     },
 
     /**
-     *
+     * Update a user by id & options
      * @param {string} id
      * @param {{}} options
      */
     async updateUser(id, options = {}) {
         checkId(id);
-        // TODO: check the options object
+        const objId = ObjectId.createFromHexString(id);
 
         const userCollection = await users();
         let originalUser = await this.getUser(id);
 
-        const updateAlbum = {};
-
-        if (options.name) {
-            updateAlbum.name = options.name;
-        } else {
-            updateAlbum.name = originalUser.name;
+        const updatedUser = {};
+        const allOptions = ['name', 'email', 'hashedPassword', 'lessons', 'completedLessons', 'completedQuestions', 'badges']
+        for (var i in allOptions) {
+            let op = allOptions[i];
+            if (options[allOptions[i]]) {
+                updatedUser[op] = options[op];
+            } else {
+                updatedUser[op] = originalUser[op];
+            }
         }
 
         const updatedInfo = await userCollection.updateOne(
-            { _id: new ObjectID(id) },
+            { 
+                _id: objId
+            },
             {
-                $set: { name: updateAlbum.name },
-                // TODO: update this query
+                $set: updatedUser,
             }
         );
         if (updatedInfo.modifiedCount === 0) {
@@ -114,20 +123,20 @@ module.exports = {
         return await this.getUser(id);
     },
 
+    /* Remove a user by id */
     async removeUser(id) {
         checkId(id);
-
-        const user = await this.getUser(id);
+        const objId = ObjectId.createFromHexString(id);
 
         const userCollection = await users();
 
         const deletionInfo = await userCollection.deleteOne({
-            _id: new ObjectID(id),
+            _id: objId
         });
         if (deletionInfo.deletedCount === 0) {
             throw ERRORS.NOMODIFY;
         }
 
-        return user;
-    },
+        return true;
+    }
 };
