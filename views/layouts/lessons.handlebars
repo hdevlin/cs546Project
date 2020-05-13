@@ -9,8 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/site.css">
-    <script src="/public/script.js"></script>
-    <script src="/public/lessonsPage.js"></script>
+    <script src="/public/common.js"></script>
 </head>
 <body onload="changeDifficultyText(); setup();">
     <ul class="navbar">
@@ -54,7 +53,7 @@
                     <img class="badge-icon rounded-circle" src="/public/images/{{file}}">
                     {{/each}}
                 </td>
-                <td><a id="{{_id}}" class="btn btn-success start">Start</a></td>
+                <td><a id="{{_id}}" class="btn btn-success open-lesson">Start</a></td>
             </tr>
             {{/each}}
 

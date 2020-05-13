@@ -17,3 +17,17 @@ function changeDifficultyText() {
         }
     }
 }
+
+/* Event listeners for some pages */
+function setup() {
+    elems = document.getElementsByClassName("open-lesson");
+    for (let i = 0; i < elems.length; ++i) {
+        elems[i].addEventListener("click", startClick);
+    }
+}
+
+/* Launch lesson */
+function startClick() {
+    let parentUrl = window.location.href.split('/').slice(0, -1).join('/');
+    window.location.href = parentUrl + `/lesson/${event.target.id}`;
+}

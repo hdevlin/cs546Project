@@ -1,5 +1,5 @@
 const express = require("express");
-const users = require("../data/samples/users");
+const users = require("../data/users");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
@@ -20,17 +20,13 @@ router.post("/login", async (req, res) => {
             errorMsg: "Invalid login",
         });
     } else {
-        // TODO get users collection from database (maybe make a getUserByEmail function)
-        let userObj = users.find(
-            (user) =>
-                user.email.toLowerCase() === req.body["email"].toLowerCase()
-        );
-        if (userObj) {
+        const gotUser = await users.getUserByEmail(req.body['email']);
+        if (gotUser) {
             let passMatch;
             try {
                 passMatch = await bcrypt.compare(
                     req.body["password"],
-                    userObj.hashedPassword
+                    gotUser.hashedPassword
                 );
             } catch (err) {
                 console.log(err);
@@ -40,9 +36,9 @@ router.post("/login", async (req, res) => {
                 // create cookie, set expiration, redirect
                 let expiresIn = new Date();
                 expiresIn.setHours(expiresIn.getHours() + 1);
-                req.session.user = userObj;
+                req.session.user = gotUser;
                 req.session.cookie.expires = expiresIn;
-                console.log(`User ${userObj.email} logged in`);
+                console.log(`User ${gotUser.email} logged in`);
                 res.redirect("/");
                 return;
             }
