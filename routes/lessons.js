@@ -5,18 +5,30 @@ const badges = require("../data/badges");
 const users = require("../data/users");
 const questions = require("../data/questions");
 const router = express.Router();
+const { ERRORS } = require("../data/common");
 
 router.get("/lessons", async (_, res) => {
-    let gotLessons = await lessons.getAllLessons();
+    let gotLessons;
+    try {
+        gotLessons = await lessons.getAllLessons();
+    } catch (e) {
+        console.log(`Error Getting All Lessons: ${e}`);
+    }
+
     let badgesObjs = [];
     for (var i in gotLessons) {
         for (var b in gotLessons[i].badges) {
-            const gotBadge = await badges.getBadge(gotLessons[i].badges[b]);
-            badgesObjs.push(gotBadge);
+            try {
+                const gotBadge = await badges.getBadge(gotLessons[i].badges[b]);
+                badgesObjs.push(gotBadge);
+            } catch (e) {
+                console.log(`Error getting badge: ${e}`);
+            }
         }
         gotLessons[i].badges = badgesObjs;
         badgesObjs = [];
     }
+
     res.render("lessons", {
         reqbody: JSON.parse(xss(JSON.stringify(gotLessons))),
     });
@@ -28,20 +40,37 @@ router.get("/lesson/:id", async (req, res) => {
         res.redirect("/login");
         return;
     }
-    let gotLesson = await lessons.getLesson(req.params.id.toLowerCase());
-    if (!gotLesson) {
-        res.status(404).json({ error: "Not found" });
-        return;
+    let gotLesson;
+    try {
+        gotLesson = await lessons.getLesson(req.params.id.toLowerCase());
+    } catch (e) {
+        if (e == ERRORS.NOEXIST) {
+            res.status(404).json({ error: "Not found" });
+            return;
+        } else {
+            console.log(`Error Getting Lesson: ${e}`);
+        }
     }
+
     let questionsObjs = [];
     let badgesObjs = [];
     for (var i in gotLesson.questions) {
-        const gotQuestion = await questions.getQuestion(gotLesson.questions[i]);
-        questionsObjs.push(gotQuestion);
+        try {
+            const gotQuestion = await questions.getQuestion(
+                gotLesson.questions[i]
+            );
+            questionsObjs.push(gotQuestion);
+        } catch (e) {
+            console.log(`Error getting questions: ${e}`);
+        }
     }
     for (var i in gotLesson.badges) {
-        const gotBadge = await badges.getBadge(gotLesson.badges[i]);
-        badgesObjs.push(gotBadge);
+        try {
+            const gotBadge = await badges.getBadge(gotLesson.badges[i]);
+            badgesObjs.push(gotBadge);
+        } catch (e) {
+            console.log(`Error getting badge: ${e}`);
+        }
     }
     gotLesson.questions = questionsObjs;
     gotLesson.badges = badgesObjs;
@@ -52,12 +81,16 @@ router.post("/lesson", async (req, res) => {
     // update db with removed lesson
     if (!req.body.dropLesson) return;
     console.log(req.body.dropLesson);
-    const updatedUser = await users.updateRemovedLesson(
-        req.session.user._id.toString(),
-        req.body.dropLesson
-    );
-    console.log(updatedUser);
-    req.session.user = updatedUser;
+    try {
+        const updatedUser = await users.updateRemovedLesson(
+            req.session.user._id.toString(),
+            req.body.dropLesson
+        );
+        console.log(updatedUser);
+        req.session.user = updatedUser;
+    } catch (e) {
+        console.log(`Error Dropping Lesson: ${e}`);
+    }
     res.redirect("/");
 });
 
