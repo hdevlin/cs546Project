@@ -19,8 +19,7 @@ router.get("/profile", async (req, res) => {
             const gotBadge = await badges.getBadge(userObj['badges'][i]._id.toString());
             userObj['badges'][i] = gotBadge;
         }
-        res.render("layouts/profile", {
-            layout: false,
+        res.render("profile", {
             reqbody: JSON.parse(xss(JSON.stringify(userObj))),
         });
     } else {

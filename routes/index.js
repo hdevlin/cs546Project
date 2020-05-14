@@ -25,8 +25,7 @@ const constructorMethod = (app) => {
                 userObj['badges'][i] = gotBadge;
             }
         }
-        res.render("layouts/main", {
-            layout: false,
+        res.render("dashboard", {
             reqbody: JSON.parse(xss(JSON.stringify(userObj)))
         });
     });

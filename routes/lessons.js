@@ -17,7 +17,9 @@ router.get("/lessons", async (_, res) => {
         gotLessons[i].badges = badgesObjs;
         badgesObjs = [];
     }
-    res.render("layouts/lessons", { layout: false, reqbody: JSON.parse(xss(JSON.stringify(gotLessons))) });
+    res.render("lessons", {
+        reqbody: JSON.parse(xss(JSON.stringify(gotLessons))),
+    });
 });
 
 router.get("/lesson/:id", async (req, res) => {
@@ -38,7 +40,7 @@ router.get("/lesson/:id", async (req, res) => {
         questionsObjs.push(gotQuestion);
     }
     for (var i in gotLesson.badges) {
-        const gotBadge = await badges.getBadge(gotLesson.badges[i])
+        const gotBadge = await badges.getBadge(gotLesson.badges[i]);
         badgesObjs.push(gotBadge);
     }
     gotLesson.questions = questionsObjs;
@@ -50,10 +52,13 @@ router.post("/lesson", async (req, res) => {
     // update db with removed lesson
     if (!req.body.dropLesson) return;
     console.log(req.body.dropLesson);
-    const updatedUser = await users.updateRemovedLesson(req.session.user._id.toString(), req.body.dropLesson);
+    const updatedUser = await users.updateRemovedLesson(
+        req.session.user._id.toString(),
+        req.body.dropLesson
+    );
     console.log(updatedUser);
     req.session.user = updatedUser;
     res.redirect("/");
-})
+});
 
 module.exports = router;

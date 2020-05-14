@@ -22,8 +22,7 @@ router.get("/question/:id", async (req, res) => {
         questions: gotLesson.questions,
         curQuestion: gotQuestion,
     };
-    res.render("layouts/question", {
-        layout: false,
+    res.render("question", {
         reqbody: JSON.parse(xss(JSON.stringify(qReqBody)))
     });
 });

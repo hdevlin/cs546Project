@@ -23,7 +23,7 @@ async function updateUserObject(userObj) {
 }
 
 router.get("/login", async (_, res) => {
-    res.render("login", { layout: false });
+    res.render("login");
 });
 
 router.post("/login", async (req, res) => {

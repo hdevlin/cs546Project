@@ -1,0 +1,55 @@
+<body onload="changeDifficultyText(); setup();">
+    <ul class="navbar">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/lessons">Browse Lessons</a></li>
+        <li><a href="/profile">My Profile</a></li>
+    </ul>
+
+    <div class="jumbotron text-center">
+        <h1>Dashboard</h1>
+    </div>
+
+    <main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="ip">Lessons In Progress</h2>
+                {{#if reqbody.email}}
+                    <p>Welcome back, {{reqbody.name}}. <a href="/logout">Logout?</a></p>
+                {{else}}
+                    <p><a href="/login">Login</a> to track your progress!</p>
+                {{/if}}
+
+                <!--
+                    Populate using request body
+                -->
+                {{#each reqbody.lessons}}
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{title}}</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item diff">{{difficulty}}</li>
+                            <li class="list-group-item">0% complete</li>
+                        </ul>
+                        <br>
+                        <a id="{{_id}}" class="btn btn-primary open-lesson">Continue</a>
+                        <a id="{{_id}}" class="btn btn-danger drop-lesson">Drop</a>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 dashboard-column">
+                <h2 id="browse">More Lessons</h2>
+                <p>[Display some recommended lessons]</p>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <br>
+    <footer>Copyright &copy; 2020 Quizzo</footer>
+</body>

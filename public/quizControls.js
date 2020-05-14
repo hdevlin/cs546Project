@@ -3,7 +3,7 @@ var numQuestions = 0;
 var selectedChoice = "";
 var correctAns = "";
 
-function setup(qids, ans) {
+function setupQuiz(qids, ans) {
     document.getElementById("q-mc-0").addEventListener("click", selectChoice);
     document.getElementById("q-mc-1").addEventListener("click", selectChoice);
     document.getElementById("q-mc-2").addEventListener("click", selectChoice);

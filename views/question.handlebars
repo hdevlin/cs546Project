@@ -1,0 +1,53 @@
+<body onload="setupQuiz('{{reqbody.questions}}', {{reqbody.curQuestion.answer}})">
+    <ul class="navbar">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/lessons">Browse Lessons</a></li>
+        <li><a href="/profile">My Profile</a></li>
+    </ul>
+
+    <div class="jumbotron text-center">
+        <h1>{{reqbody.lessonTitle}}</h1>
+    </div>
+
+    <main>
+        <div class="container">
+
+            <h3 id="q-title">{{reqbody.curQuestion.question}}</h3><br>
+
+            <img src="">
+
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td><a href="#" id="q-mc-0"
+                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[0]}}</a></td>
+                        <td><a href="#" id="q-mc-1"
+                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[1]}}</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><a href="#" id="q-mc-2"
+                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[2]}}</a></td>
+                        <td><a href="#" id="q-mc-3"
+                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[3]}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <p id="selected-ans" hidden>Selected answer:</p>
+                <button type="submit" class="btn btn-success" id="submit">Submit Answer</button>
+            </div>
+
+            <br>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary" id="prev">Previous</button>
+                <button type="button" class="btn btn-secondary" id="next">Next</button>
+            </div>
+
+        </div>
+    </main>
+
+    <br>
+    <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
+</body>
