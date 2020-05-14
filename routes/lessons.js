@@ -15,6 +15,7 @@ router.get("/lessons", async (_, res) => {
             badgesObjs.push(gotBadge);
         }
         gotLessons[i].badges = badgesObjs;
+        badgesObjs = [];
     }
     res.render("layouts/lessons", { layout: false, reqbody: JSON.parse(xss(JSON.stringify(gotLessons))) });
 });

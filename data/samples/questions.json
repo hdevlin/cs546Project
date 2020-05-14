@@ -21,7 +21,7 @@
         "choices": ["O(1)","O(n)","O(nlogn)","O(n^2)"],
         "answer": "O(n^2)",
         "lesson_id": "l1",
-        "lesson_name": "Sorting Algorithm"
+        "lesson_name": "Sorting Algorithms"
     },
     {
         "_id": "q3",
@@ -29,7 +29,7 @@
         "choices": ["QuickSort","MergeSort","SelectionSort","BogoSort"],
         "answer": "BogoSort",
         "lesson_id": "l1",
-        "lesson_name": "Sorting Algorithm"
+        "lesson_name": "Sorting Algorithms"
     },
     {
         "_id": "q4",
@@ -37,7 +37,7 @@
         "choices": ["Linear, because the list doesn't need to be sorted", "Binary, because the number of possibilities is cut in half each time", "Neither, it doesn't matter"],
         "answer": "Binary, because the number of possibilities is cut in half each time",
         "lesson_id": "l1",
-        "lesson_name": "Sorting Algorithm"
+        "lesson_name": "Sorting Algorithms"
     },
     {
         "_id": "q5",
@@ -45,7 +45,7 @@
         "choices": ["Never", "Always", "When the quicksort pivot is at the beginning/end of the list, and the list is sorted", "When the quicksort pivot is in the middle of the list"],
         "answer": "When the quicksort pivot is at the beginning/end of the list, and the list is sorted",
         "lesson_id": "l1",
-        "lesson_name": "Sorting Algorithm"
+        "lesson_name": "Sorting Algorithms"
     },
     {
         "_id": "q6",
@@ -53,7 +53,7 @@
         "choices": ["In every case","For small lists", "For large lists", "Never"],
         "answer": "For small lists",
         "lesson_id": "l1",
-        "lesson_name": "Sorting Algorithm"
+        "lesson_name": "Sorting Algorithms"
     },
     {
         "_id": "q7",

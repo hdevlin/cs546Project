@@ -9,7 +9,7 @@
     },
     {
         "_id": "l1",
-        "title": "Sorting Algorthims",
+        "title": "Sorting Algorithms",
         "subject": "Computer Science",
         "difficulty": 3,
         "questions": ["q2", "q3", "q4", "q5", "q6"],
@@ -21,6 +21,6 @@
         "subject": "Computer Science",
         "difficulty": 2,
         "questions": ["q7", "q8", "q9", "q10"],
-        "badges": ["b3"]
+        "badges": ["b2"]
     }
 ]
