@@ -54,7 +54,7 @@ router.get("/lesson/:id", async (req, res) => {
 
     let questionsObjs = [];
     let badgesObjs = [];
-    for (var i in gotLesson.questions) {
+    for (let i in gotLesson.questions) {
         try {
             const gotQuestion = await questions.getQuestion(
                 gotLesson.questions[i]
@@ -64,7 +64,7 @@ router.get("/lesson/:id", async (req, res) => {
             console.log(`Error getting questions: ${e}`);
         }
     }
-    for (var i in gotLesson.badges) {
+    for (let i in gotLesson.badges) {
         try {
             const gotBadge = await badges.getBadge(gotLesson.badges[i]);
             badgesObjs.push(gotBadge);

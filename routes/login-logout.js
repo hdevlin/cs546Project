@@ -5,17 +5,18 @@ const badges = require("../data/badges");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const { ERRORS } = require("../data/common");
+
 async function updateUserObject(userObj) {
     // change ids to objects
-    for (var i in userObj["lessons"]) {
+    for (let i in userObj["lessons"]) {
         try {
             const gotLesson = await lessons.getLesson(userObj["lessons"][i]);
             userObj["lessons"][i] = gotLesson;
         } catch (error) {
-            console.log(`Error Getting Lesson: ${e}`);
+            console.log(`Error Getting Lesson: ${error}`);
         }
     }
-    for (var i in userObj["completedLessons"]) {
+    for (let i in userObj["completedLessons"]) {
         try {
             const gotLesson = await lessons.getLesson(
                 userObj["completedLessons"][i]
@@ -25,7 +26,7 @@ async function updateUserObject(userObj) {
             console.log(`Error Getting Completed Lesson: ${e}`);
         }
     }
-    for (var i in userObj["badges"]) {
+    for (let i in userObj["badges"]) {
         try {
             const gotBadge = await badges.getBadge(userObj["badges"][i]);
             userObj["badges"][i] = gotBadge;
