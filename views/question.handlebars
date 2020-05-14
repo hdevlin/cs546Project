@@ -14,30 +14,29 @@
 
             <h3 id="q-title">{{reqbody.curQuestion.question}}</h3><br>
 
-            <img src="">
+            <!--img src=""-->
 
             <table class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td><a href="#" id="q-mc-0"
-                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[0]}}</a></td>
-                        <td><a href="#" id="q-mc-1"
-                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[1]}}</a></td>
-                    </tr>
 
-                    <tr>
-                        <td><a href="#" id="q-mc-2"
-                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[2]}}</a></td>
-                        <td><a href="#" id="q-mc-3"
-                                class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[3]}}</a></td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td><button type="button" name="multiple-choice"
+                            class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[0]}}</button></td>
+                    <td><button type="button" name="multiple-choice"
+                            class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[1]}}</button></td>
+                </tr>
+
+                <tr>
+                    <td><button type="button" name="multiple-choice"
+                            class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[2]}}</button></td>
+                    <td><button type="button" name="multiple-choice"
+                            class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[3]}}</button></td>
+                </tr>
+
             </table>
 
-            <div>
-                <p id="selected-ans" hidden>Selected answer:</p>
-                <button type="submit" class="btn btn-success" id="submit">Submit Answer</button>
-            </div>
+
+            <p id="selected-ans" hidden>Selected answer:</p>
+            <button type="submit" class="btn btn-success" id="submit">Submit Answer</button>
 
             <br>
             <div class="btn-group" role="group">
