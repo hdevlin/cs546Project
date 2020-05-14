@@ -9,26 +9,18 @@
     },
     {
         "_id": "l1",
-        "title": "Basic Algebra",
-        "subject": "Math",
-        "difficulty": 1,
-        "questions": ["q2", "q3"],
-        "badges": ["b1"]
+        "title": "Sorting Algorthims",
+        "subject": "Computer Science",
+        "difficulty": 3,
+        "questions": ["q2", "q3", "q4", "q5", "q6"],
+        "badges": ["b1", "b2"]
     },
     {
         "_id": "l2",
-        "title": "Callback Functions in JS",
-        "subject": "Computer Science",
-        "difficulty": 1,
-        "questions": ["q4", "q5"],
-        "badges": ["b2"]
-    },
-    {
-        "_id": "l3",
-        "title": "Python Classes",
+        "title": "Binary Conversion",
         "subject": "Computer Science",
         "difficulty": 2,
-        "questions": ["q6", "q7"],
-        "badges": ["b2", "b3"]
+        "questions": ["q7", "q8", "q9", "q10"],
+        "badges": ["b3"]
     }
 ]

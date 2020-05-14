@@ -14,5 +14,77 @@
         "answer": "16",
         "lesson_id": "l0",
         "lesson_name": "Test Lesson"
+    },
+    {
+        "_id": "q2",
+        "question": "What is the worst case complexity for QuickSort?",
+        "choices": ["O(1)","O(n)","O(nlogn)","O(n^2)"],
+        "answer": "O(n^2)",
+        "lesson_id": "l1",
+        "lesson_name": "Sorting Algorithm"
+    },
+    {
+        "_id": "q3",
+        "question": "Which of these sorting algorithms has the slowest average performance?",
+        "choices": ["QuickSort","MergeSort","SelectionSort","BogoSort"],
+        "answer": "BogoSort",
+        "lesson_id": "l1",
+        "lesson_name": "Sorting Algorithm"
+    },
+    {
+        "_id": "q4",
+        "question": "Is binary search or linear search faster, and why?",
+        "choices": ["Linear, because the list doesn't need to be sorted", "Binary, because the number of possibilities is cut in half each time", "Neither, it doesn't matter"],
+        "answer": "Binary, because the number of possibilities is cut in half each time",
+        "lesson_id": "l1",
+        "lesson_name": "Sorting Algorithm"
+    },
+    {
+        "_id": "q5",
+        "question": "In what case is merge sort faster than quicksort?",
+        "choices": ["Never", "Always", "When the quicksort pivot is at the beginning/end of the list, and the list is sorted", "When the quicksort pivot is in the middle of the list"],
+        "answer": "When the quicksort pivot is at the beginning/end of the list, and the list is sorted",
+        "lesson_id": "l1",
+        "lesson_name": "Sorting Algorithm"
+    },
+    {
+        "_id": "q6",
+        "question": "When is InsertionSort Faster than QuickSort?",
+        "choices": ["In every case","For small lists", "For large lists", "Never"],
+        "answer": "For small lists",
+        "lesson_id": "l1",
+        "lesson_name": "Sorting Algorithm"
+    },
+    {
+        "_id": "q7",
+        "question": "What is 15 in binary?",
+        "choices": ["1010", "10000", "1111", "15"],
+        "answer": "1111",
+        "lesson_id": "l2",
+        "lesson_name": "Binary Conversion"
+    },
+    {
+        "_id": "q8",
+        "question": "What is 1010(base 2) + 11000(base 2)",
+        "choices": ["100010", "100000", "111010", "1000100"],
+        "answer": "100010",
+        "lesson_id": "l2",
+        "lesson_name": "Binary Conversion"
+    },
+    {
+        "_id": "q9",
+        "question": "What is -112 in binary, using one's compliment?",
+        "choices": ["10001111","01111000","01110000","11110000"],
+        "answer": "10001111",
+        "lesson_id": "l2",
+        "lesson_name": "Binary Conversion"
+    },
+    {
+        "_id": "q10",
+        "question": "How is two's compliment different than one's compliment?",
+        "choices": ["No leading sign bit", "Only one is for negative numbers", "No \"negative zero\" in two's", "No difference"],
+        "answer": "No \"negative zero\" in two's",
+        "lesson_id": "l2",
+        "lesson_name": "Binary Conversion"
     }
 ]
