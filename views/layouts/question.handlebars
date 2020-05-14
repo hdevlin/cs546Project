@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Question - Untitled Learning Platform</title>
+    <title>Question - Quizzo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -11,7 +12,8 @@
     <link rel="stylesheet" href="/public/site.css">
     <script src="/public/quizControls.js"></script>
 </head>
-<body onload="setup('{{reqbody.questions}}', {{reqbody.curQuestion.answer}})">
+
+<body onload="setup('{{qReqBody.questions}}', '{{qReqBody.curQuestion.answer}}', '')">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -19,45 +21,63 @@
     </ul>
 
     <div class="jumbotron text-center">
-        <h1>{{reqbody.lessonTitle}}</h1>
+        <h1>{{qReqBody.lessonTitle}}</h1>
     </div>
 
     <main>
-    <div class="container">
+        <div class="container">
 
-        <h3 id="q-title">{{reqbody.curQuestion.question}}</h3><br>
+            <h3 id="q-title">{{qReqBody.curQuestion.question}}</h3><br>
 
-        <img src="">
-        
-        <table class="table table-borderless">
-            <tbody>
-            <tr>
-                <td><a href="#" id="q-mc-0" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[0]}}</a></td>
-                <td><a href="#" id="q-mc-1" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[1]}}</a></td>
-            </tr>
+            <img src="">
 
-            <tr>
-                <td><a href="#" id="q-mc-2" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[2]}}</a></td>
-                <td><a href="#" id="q-mc-3" class="btn btn-block btn-primary">{{reqbody.curQuestion.choices.[3]}}</a></td>
-            </tr>
-            </tbody>
-        </table>
-    
-        <div>
-            <p id="selected-ans" hidden>Selected answer:</p>
-            <button type="submit" class="btn btn-success" id="submit">Submit Answer</button>
+            <form action="/question" method="POST">
+                <table class="table table-borderless">
+
+                    <tr>
+                        <td class="btn btn-block btn-primary">
+                            <label for="q-mc-0">{{qReqBody.curQuestion.choices.[0]}}</label>
+                            <input required name="mc" type="radio" id="q-mc-0"
+                                value="{{qReqBody.curQuestion.choices.[0]}}" onclick="selectChoice(0)">
+                        </td>
+                        <td class="btn btn-block btn-primary">
+                            <label for="q-mc-1">{{qReqBody.curQuestion.choices.[1]}}</label>
+                            <input required name="mc" type="radio" id="q-mc-1"
+                                value="{{qReqBody.curQuestion.choices.[1]}}" onclick="selectChoice(1)">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="btn btn-block btn-primary">
+                            <label for="q-mc-2">{{qReqBody.curQuestion.choices.[2]}}</label>
+                            <input required name="mc" type="radio" id="q-mc-2"
+                                value="{{qReqBody.curQuestion.choices.[2]}}" onclick="selectChoice(2)">
+                        </td>
+                        <td class="btn btn-block btn-primary">
+                            <label for="q-mc-3">{{qReqBody.curQuestion.choices.[3]}}</label>
+                            <input required name="mc" type="radio" id="q-mc-3"
+                                value="{{qReqBody.curQuestion.choices.[3]}}" onclick="selectChoice(3)">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <input type="submit" class="btn btn-success" id="submit" value="Submit Answer">
+                <p id="selected-ans" hidden>Selected answer:</p>
+            </form>
+
+
+
+            <div class="btn-group" role="group">
+                <a href="prev" class="btn btn-secondary" id="prev">Previous</a>
+                <a href="next" class="btn btn-secondary" id="next">Next</a>
+            </div>
+
         </div>
-
-        <br>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-secondary" id="prev">Previous</button>
-            <button type="button" class="btn btn-secondary" id="next">Next</button>
-        </div>
-
-    </div>
     </main>
 
     <br>
-    <footer>Copyright &copy; 2020 Untitled Learning Platform</footer>
+    <footer>Copyright &copy; 2020 Quizzo</footer>
 </body>
+
 </html>

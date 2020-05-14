@@ -38,7 +38,46 @@ async function main() {
     }
 
     // add sample badges
+    console.log(`Adding ${bSample.length} badges`)
+    for (var i in bSample) {
+        let b = bSample[i]
+        await badges.addBadge(b.name, b.requirements, b.description, b.file)
+        .catch((err) => console.log(err))
+    }
+
     // add sample users
+    console.log(`Adding ${uSample.length} users`)
+    for (var i in uSample) {
+        let u = uSample[i]
+        const newUser = await users.addUser(u.name, u.email, u.hashedPassword)
+        .catch((err) => console.log(err))
+
+        // update with lesson ids
+        let lessonsIds = []
+        let completedLessonsIds = []
+        let badgesIds = []
+        for (var i in u.lessons) {
+            const userLesson = await lessons.getLessonByName(u.lessons[i])
+            .catch((err) => console.log(err))
+            lessonsIds.push(userLesson._id.toString())
+        }
+        for (var i in u.completedLessons) {
+            const userLesson = await lessons.getLessonByName(u.completedLessons[i])
+            .catch((err) => console.log(err))
+            completedLessonsIds.push(userLesson._id.toString())
+        }
+        for (var i in u.badges) {
+            const userBadge = await badges.getBadgeByName(u.badges[i])
+            .catch((err) => console.log(err))
+            badgesIds.push(userBadge._id.toString())
+        }
+        await users.updateUser(newUser._id.toString(), {
+            lessons: lessonsIds,
+            completedLessons: completedLessonsIds,
+            badges: badgesIds
+        })
+        .catch((err) => console.log(err))
+    }
 
 	await db.serverConfig.close()
 }
