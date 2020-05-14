@@ -31,6 +31,7 @@ router.get("/lessons", async (_, res) => {
 
     res.render("lessons", {
         reqbody: JSON.parse(xss(JSON.stringify(gotLessons))),
+        title: "Quizzo - Lessons",
     });
 });
 

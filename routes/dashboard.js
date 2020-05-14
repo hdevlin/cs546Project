@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 
     res.render("dashboard", {
         reqbody: JSON.parse(xss(JSON.stringify(userObj))),
+        title: "Quizzo - Dashboard",
     });
 });
 

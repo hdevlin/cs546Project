@@ -38,6 +38,7 @@ router.get("/question/:id", async (req, res) => {
     };
     res.render("question", {
         reqbody: JSON.parse(xss(JSON.stringify(qReqBody))),
+        title: "Quizzo - Quiz",
     });
 });
 

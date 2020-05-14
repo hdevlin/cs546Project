@@ -14,6 +14,7 @@ router.get("/profile", async (req, res) => {
     if (userObj) {
         res.render("profile", {
             reqbody: JSON.parse(xss(JSON.stringify(userObj))),
+            title: "Quizzo - Profile",
         });
     } else {
         res.redirect("/login");
