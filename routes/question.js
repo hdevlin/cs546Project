@@ -20,7 +20,7 @@ router.get("/question/:id", async (req, res) => {
             res.status(404).json({ error: "Not found" });
             return;
         } else {
-            console.log(`Error getting question: ${e}`);
+            console.log(`Error getting question: ${error}`);
         }
     }
 
@@ -28,7 +28,7 @@ router.get("/question/:id", async (req, res) => {
     try {
         gotLesson = await lessons.getLesson(gotQuestion.lesson_id);
     } catch (error) {
-        console.log(`Error getting Lesson: ${e}`);
+        console.log(`Error getting Lesson: ${error}`);
     }
 
     const qReqBody = {
@@ -52,7 +52,7 @@ router.post("/question", async (req, res) => {
         );
         req.session.user = updatedUser;
     } catch (error) {
-        console.log(`Error updating completed question: ${e}`);
+        console.log(`Error updating completed question: ${error}`);
     }
     res.redirect("#");
 });
