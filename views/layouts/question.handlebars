@@ -13,7 +13,7 @@
     <script src="/public/quizControls.js"></script>
 </head>
 
-<body onload="setup('{{reqbody.questions}}', '{{reqbody.curQuestion.answer}}', '')">
+<body onload="setup('{{qReqBody.questions}}', '{{qReqBody.curQuestion.answer}}', '')">
     <ul class="navbar">
         <li><a href="/">Dashboard</a></li>
         <li><a href="/lessons">Browse Lessons</a></li>
@@ -21,13 +21,13 @@
     </ul>
 
     <div class="jumbotron text-center">
-        <h1>{{reqbody.lessonTitle}}</h1>
+        <h1>{{qReqBody.lessonTitle}}</h1>
     </div>
 
     <main>
         <div class="container">
 
-            <h3 id="q-title">{{reqbody.curQuestion.question}}</h3><br>
+            <h3 id="q-title">{{qReqBody.curQuestion.question}}</h3><br>
 
             <img src="">
 
@@ -36,27 +36,27 @@
 
                     <tr>
                         <td class="btn btn-block btn-primary">
-                            <label for="q-mc-0">{{reqbody.curQuestion.choices.[0]}}</label>
+                            <label for="q-mc-0">{{qReqBody.curQuestion.choices.[0]}}</label>
                             <input required name="mc" type="radio" id="q-mc-0"
-                                value="{{reqbody.curQuestion.choices.[0]}}" onclick="selectChoice(0)">
+                                value="{{qReqBody.curQuestion.choices.[0]}}" onclick="selectChoice(0)">
                         </td>
                         <td class="btn btn-block btn-primary">
-                            <label for="q-mc-1">{{reqbody.curQuestion.choices.[1]}}</label>
+                            <label for="q-mc-1">{{qReqBody.curQuestion.choices.[1]}}</label>
                             <input required name="mc" type="radio" id="q-mc-1"
-                                value="{{reqbody.curQuestion.choices.[1]}}" onclick="selectChoice(1)">
+                                value="{{qReqBody.curQuestion.choices.[1]}}" onclick="selectChoice(1)">
                         </td>
                     </tr>
 
                     <tr>
                         <td class="btn btn-block btn-primary">
-                            <label for="q-mc-2">{{reqbody.curQuestion.choices.[2]}}</label>
+                            <label for="q-mc-2">{{qReqBody.curQuestion.choices.[2]}}</label>
                             <input required name="mc" type="radio" id="q-mc-2"
-                                value="{{reqbody.curQuestion.choices.[2]}}" onclick="selectChoice(2)">
+                                value="{{qReqBody.curQuestion.choices.[2]}}" onclick="selectChoice(2)">
                         </td>
                         <td class="btn btn-block btn-primary">
-                            <label for="q-mc-3">{{reqbody.curQuestion.choices.[3]}}</label>
+                            <label for="q-mc-3">{{qReqBody.curQuestion.choices.[3]}}</label>
                             <input required name="mc" type="radio" id="q-mc-3"
-                                value="{{reqbody.curQuestion.choices.[3]}}" onclick="selectChoice(3)">
+                                value="{{qReqBody.curQuestion.choices.[3]}}" onclick="selectChoice(3)">
                         </td>
                     </tr>
 
