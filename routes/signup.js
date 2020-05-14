@@ -22,10 +22,16 @@ router.post("/signup", async (req, res) => {
     } else {
         // generate hash
         // This is not being used currently
-        const passHash = await bcrypt.hash(
-            req.body["password"],
-            await bcrypt.genSalt(saltRounds)
-        );
+        let passHash;
+
+        try {
+            passHash = await bcrypt.hash(
+                req.body["password"],
+                await bcrypt.genSalt(saltRounds)
+            );
+        } catch (error) {
+            console.log(`Error when hashing password: ${error}`);
+        }
 
         // update db
         let gotUser = null;
@@ -46,7 +52,7 @@ router.post("/signup", async (req, res) => {
                 await users.addUser(
                     req.body["name"],
                     req.body["email"],
-                    req.body["password"]
+                    passHash
                 );
             }
         }
