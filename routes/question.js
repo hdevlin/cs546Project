@@ -24,7 +24,7 @@ router.get("/question/:id", async (req, res) => {
     };
     res.render("layouts/question", {
         layout: false,
-        qReqBody: JSON.parse(xss(JSON.stringify(qReqBody)))
+        reqbody: JSON.parse(xss(JSON.stringify(qReqBody)))
     });
 });
 
