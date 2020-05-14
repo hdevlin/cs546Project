@@ -38,18 +38,16 @@ router.get("/question/:id", async (req, res) => {
     };
     res.render("question", {
         reqbody: JSON.parse(xss(JSON.stringify(qReqBody))),
-        title: "Quizzo - Quiz",
     });
 });
 
-// An Error occurs when using this route
 router.post("/question", async (req, res) => {
     // update db with completed question id
     if (!req.body.completedQuestion) return;
-
+    let question = req.session.user._id + "";
     try {
         const updatedUser = await users.updateCompletedQuestion(
-            req.session.user._id.toString(),
+            question,
             req.body.completedQuestion
         );
         req.session.user = updatedUser;
