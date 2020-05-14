@@ -41,6 +41,7 @@ router.get("/question/:id", async (req, res) => {
     });
 });
 
+// An Error occurs when using this route
 router.post("/question", async (req, res) => {
     // update db with completed question id
     if (!req.body.completedQuestion) return;
